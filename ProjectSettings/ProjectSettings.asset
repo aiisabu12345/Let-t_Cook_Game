@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 28
-  productGUID: 24b19cba9b1be9c41a3532e4c6c3c93a
+  productGUID: 7c267e4ee3c02534c88cb7c08cc568d3
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: test_project
+  productName: UIletcooked
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -838,14 +838,14 @@ PlayerSettings:
   editorAssembliesCompatibilityLevel: 1
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: test_project
+  metroPackageName: UIletcooked
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: test_project
+  metroApplicationDescription: UIletcooked
   wsaImages: {}
   metroTileShortName: 
   metroTileShowName: 0
@@ -916,11 +916,11 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 1
   windowsGamepadBackendHint: 0
-  cloudProjectId: a6aaaded-1271-4a1a-9d48-8d5c10438145
+  cloudProjectId: 0f45a43d-a1a4-45c0-8597-bce7903ef796
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: test_project
-  organizationId: siwkogod
+  projectName: UIletcooked
+  organizationId: lolrunggeza
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
