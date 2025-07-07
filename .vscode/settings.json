@@ -60,11 +60,11 @@
         "*.asset": "yaml",
         "*.meta": "yaml",
         "*.prefab": "yaml",
-        "*.unity": "yaml",
+        "*.unity": "yaml"
     },
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.patterns": {
-        "*.sln": "*.csproj",
+        "*.sln": "*.csproj"
     },
-    "dotnet.defaultSolution": "test_project.sln"
+    "dotnet.defaultSolution": "Let-t_Cook_Game.sln"
 }
