@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class scenecontrol : MonoBehaviour
@@ -17,5 +18,9 @@ public class scenecontrol : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
     }
-    
+
+    public static implicit operator scenecontrol(GameSoundManager v)
+    {
+        throw new NotImplementedException();
+    }
 }

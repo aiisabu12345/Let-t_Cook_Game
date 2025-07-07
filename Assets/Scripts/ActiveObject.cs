@@ -6,9 +6,12 @@ public class ActiveObject : MonoBehaviour
 {
     private float waitBeforeQuit = 1.5f;
     public GameObject targetObject;
-   
+    AudioManager audioManager;
     void Awake()
     {
+
+       audioManager = GameObject.FindWithTag("Audio").GetComponent<AudioManager>();
+  
         targetObject.SetActive(false);
     }
     public void TurnOn()
@@ -19,13 +22,14 @@ public class ActiveObject : MonoBehaviour
 
     public void QuitGame()
     {
+        audioManager.PlaySFX(audioManager.btn);
         StartCoroutine(QuitAfterDelay());
-
-     
-
     }
+
+
     public void nextScene(string sceneName)
     {
+        audioManager.PlaySFX(audioManager.btn);
         StartCoroutine(LoadScene(sceneName));
     }
     IEnumerator LoadScene(string sceneName)
