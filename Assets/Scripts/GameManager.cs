@@ -3,6 +3,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    public GameObject inventoryPanel;
+    public bool inventoryPanelActive = false;
+    public PanelManager panelManager;
 
     void Awake()
     {
@@ -14,7 +17,14 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
 
-        Cursor.lockState = CursorLockMode.Locked;
+    void Update()
+    {
+        if (Input.GetKey(KeyCode.E))
+        {
+            inventoryPanel.SetActive(!inventoryPanelActive);
+            panelManager.OnOpen();
+        }
     }
 }
