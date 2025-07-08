@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
     public GameObject inventoryPanel;
     public PanelManager panelManager;
 
+
     void Awake()
     {
         if (Instance == null)
