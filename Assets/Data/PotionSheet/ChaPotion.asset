@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: adac5a8b2457e5f49aadfc07b64e5c64, type: 3}
-  m_Name: RedPotion
+  m_Name: ChaPotion
   m_EditorClassIdentifier: 
   model: {fileID: 3584848056408598087, guid: df24ecd50373eaf419e020c169110869, type: 3}
-  potionName: RedPotion
+  icon: {fileID: 21300000, guid: c87659607a2ebbc428f0c4c29242e7d2, type: 3}
+  potionName: ChaPotion
   status:
-  - str
+  - cha

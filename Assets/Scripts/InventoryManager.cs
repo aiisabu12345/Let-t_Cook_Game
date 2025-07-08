@@ -1,15 +1,17 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
 
     [SerializeField]
-    private List<MaterialData> materialList;
-    public List<PotionData> potionSheet;
-    public List<PotionData> potionList;
+    private List<MaterialData> materialList = new List<MaterialData>();
+    public List<PotionData> potionSheet = new List<PotionData>();
+    public List<PotionData> potionList = new List<PotionData>();
+    public List<Sprite> bg = new List<Sprite>();
 
     void Awake()
     {
@@ -23,9 +25,15 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void AddPotion()
+    public void AddPotion(PotionData originPotion)
     {
-        potionList.Add(potionSheet[0]);
-        Debug.Log("add " + potionSheet[0]);
+        PotionData newPotion = ScriptableObject.CreateInstance<PotionData>();
+        newPotion.model = originPotion.model;
+        newPotion.potionName = originPotion.potionName;
+        newPotion.icon = originPotion.icon;
+        newPotion.status = originPotion.status;
+        newPotion.tier = originPotion.tier;
+        potionList.Add(newPotion);
+        Debug.Log("add " + newPotion.potionName);
     }
 }

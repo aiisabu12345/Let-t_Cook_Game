@@ -4,7 +4,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public GameObject inventoryPanel;
-    public bool inventoryPanelActive = false;
     public PanelManager panelManager;
 
     void Awake()
@@ -21,9 +20,9 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            inventoryPanel.SetActive(!inventoryPanelActive);
+            inventoryPanel.SetActive(!inventoryPanel.activeSelf);
             panelManager.OnOpen();
         }
     }
