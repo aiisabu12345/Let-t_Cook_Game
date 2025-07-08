@@ -12,6 +12,6 @@ public class fadeout : MonoBehaviour
     IEnumerator fadeout1()
     {
         fadeAnimator.Play("fadeout");
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
     }
 }

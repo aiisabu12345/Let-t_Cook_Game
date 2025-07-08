@@ -1365,6 +1365,8 @@ MonoBehaviour:
   SFXSource: {fileID: 636491157}
   background: {fileID: 8300000, guid: 44b21965a87ff2a4eb6f63b9afbc7ae4, type: 3}
   btn: {fileID: 8300000, guid: a0f94891533edbb4396fbd3688369804, type: 3}
+  correct: {fileID: 8300000, guid: cef07151500cd5946ad616560e619431, type: 3}
+  winner: {fileID: 8300000, guid: 30d0e7e81a46a074e845ebc89e343987, type: 3}
   walk: {fileID: 0}
   pick: {fileID: 0}
 --- !u!4 &1133492688

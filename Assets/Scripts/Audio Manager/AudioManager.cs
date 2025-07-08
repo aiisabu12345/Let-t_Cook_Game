@@ -10,6 +10,8 @@ public class AudioManager : MonoBehaviour
     [Header("---AUDIO Clip---")]
     public AudioClip background;
     public AudioClip btn;
+    public AudioClip correct;
+    public AudioClip winner;
     public AudioClip walk;
     public AudioClip pick;
 

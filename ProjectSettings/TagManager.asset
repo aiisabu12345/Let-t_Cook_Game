@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - Audio
+  - CinemachineTarget
+  - camera
+  - block
   layers:
   - Default
   - TransparentFX

@@ -42,7 +42,6 @@ public class PauseMenu : MonoBehaviour
     }
     public void Restart()
     {
-
         audioManager.PlaySFX(audioManager.btn);
         audioManager.ResetMusic();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
