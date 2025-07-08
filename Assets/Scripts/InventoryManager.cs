@@ -8,7 +8,7 @@ public class InventoryManager : MonoBehaviour
     public static InventoryManager Instance;
 
     [SerializeField]
-    private List<MaterialData> materialList = new List<MaterialData>();
+    public List<MaterialData> materialList = new List<MaterialData>();
     public List<PotionData> potionSheet = new List<PotionData>();
     public List<PotionData> potionList = new List<PotionData>();
     public List<Sprite> bg = new List<Sprite>();
@@ -35,5 +35,16 @@ public class InventoryManager : MonoBehaviour
         newPotion.tier = originPotion.tier;
         potionList.Add(newPotion);
         Debug.Log("add " + newPotion.potionName);
+    }
+
+    public void AddMaterial(MaterialData originMaterial)
+    {
+        MaterialData newMaterial = ScriptableObject.CreateInstance<MaterialData>();
+        newMaterial.icon = originMaterial.icon;
+        newMaterial.materialName = originMaterial.materialName;
+        newMaterial.tier = originMaterial.tier;
+        newMaterial.status = originMaterial.status;
+        materialList.Add(newMaterial);
+        Debug.Log("add " + newMaterial.materialName);
     }
 }

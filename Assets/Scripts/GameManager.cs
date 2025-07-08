@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
     public GameObject inventoryPanel;
     public PanelManager panelManager;
 
+
     void Awake()
     {
         if (Instance == null)
@@ -23,7 +24,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             inventoryPanel.SetActive(!inventoryPanel.activeSelf);
-            panelManager.OnOpen();
+            panelManager.SetPotion();
         }
     }
 }
