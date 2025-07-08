@@ -17,4 +17,4 @@ MonoBehaviour:
   potionName: AgiPotion
   status:
   - agi
-  tier: 0
+  tier: 2
