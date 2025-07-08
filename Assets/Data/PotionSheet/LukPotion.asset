@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adac5a8b2457e5f49aadfc07b64e5c64, type: 3}
+  m_Name: LukPotion
+  m_EditorClassIdentifier: 
+  model: {fileID: 3584848056408598087, guid: df24ecd50373eaf419e020c169110869, type: 3}
+  icon: {fileID: 21300000, guid: 9a195b82a50faf04bbe4ccd6d4a42fcd, type: 3}
+  potionName: LukPotion
+  status:
+  - luk

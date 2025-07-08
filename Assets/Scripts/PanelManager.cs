@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class PanelManager : MonoBehaviour
 {
-    public Image potionButton;
+    public GameObject potionButton;
     public Transform rightPanelTransform;
 
     public void OnOpen()
@@ -15,11 +15,12 @@ public class PanelManager : MonoBehaviour
 
         foreach (PotionData p in InventoryManager.Instance.potionList)
         {
-            Image item = Instantiate(potionButton, rightPanelTransform);
+            GameObject item = Instantiate(potionButton, rightPanelTransform);
             itemButton button = item.GetComponent<itemButton>();
 
-            item = p.icon;
             button.potion = p;
+            button.icon.sprite = p.icon;
+            button.bg.sprite = InventoryManager.Instance.bg[p.tier];
         }
     }
 }

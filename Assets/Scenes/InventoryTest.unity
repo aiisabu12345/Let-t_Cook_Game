@@ -256,7 +256,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 150, y: 150}
+  m_CellSize: {x: 200, y: 200}
   m_Spacing: {x: 10, y: 10}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -907,13 +907,13 @@ MonoBehaviour:
       - m_Target: {fileID: 557965097}
         m_TargetAssemblyTypeName: InventoryManager, Assembly-CSharp
         m_MethodName: AddPotion
-        m_Mode: 1
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 11400000, guid: 378ecc8a9c7d91444a75acc5f9134d97, type: 2}
+          m_ObjectArgumentAssemblyTypeName: PotionData, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: str
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1938145717
@@ -1207,7 +1207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50d703a6b3b9bb64bbb1859779d5167c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  potionButton: {fileID: 1626463593831462163, guid: b42a8f15e25ba764e9a8560c503d5db4, type: 3}
+  potionButton: {fileID: 8007845598696661733, guid: b42a8f15e25ba764e9a8560c503d5db4, type: 3}
   rightPanelTransform: {fileID: 405193082}
 --- !u!1001 &3427693669153917562
 PrefabInstance:
@@ -1291,11 +1291,47 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 4049314c1ac9cb2438da9e94d6d275f4, type: 2}
     - target: {fileID: 8462269558020113887, guid: 25b36dd800bf60d419ba0af7f9e95614, type: 3}
+      propertyPath: bg.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462269558020113887, guid: 25b36dd800bf60d419ba0af7f9e95614, type: 3}
+      propertyPath: 'bg.Array.data[0]'
+      value: 
+      objectReference: {fileID: 21300000, guid: e0e0958b8c8a85d46b1a79fb20ae25bf, type: 3}
+    - target: {fileID: 8462269558020113887, guid: 25b36dd800bf60d419ba0af7f9e95614, type: 3}
+      propertyPath: 'bg.Array.data[1]'
+      value: 
+      objectReference: {fileID: 21300000, guid: b7216ef8cb7f2224c87bf82964c7b45c, type: 3}
+    - target: {fileID: 8462269558020113887, guid: 25b36dd800bf60d419ba0af7f9e95614, type: 3}
+      propertyPath: 'bg.Array.data[2]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 3771e244ce9bfd04da066d1526519331, type: 3}
+    - target: {fileID: 8462269558020113887, guid: 25b36dd800bf60d419ba0af7f9e95614, type: 3}
       propertyPath: potionSheet.Array.size
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8462269558020113887, guid: 25b36dd800bf60d419ba0af7f9e95614, type: 3}
       propertyPath: 'potionSheet.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 4049314c1ac9cb2438da9e94d6d275f4, type: 2}
+    - target: {fileID: 8462269558020113887, guid: 25b36dd800bf60d419ba0af7f9e95614, type: 3}
+      propertyPath: 'potionSheet.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 633eae2c71df81a479409beaa4f36b3b, type: 2}
+    - target: {fileID: 8462269558020113887, guid: 25b36dd800bf60d419ba0af7f9e95614, type: 3}
+      propertyPath: 'potionSheet.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 378ecc8a9c7d91444a75acc5f9134d97, type: 2}
+    - target: {fileID: 8462269558020113887, guid: 25b36dd800bf60d419ba0af7f9e95614, type: 3}
+      propertyPath: 'potionSheet.Array.data[3]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 2a2849f8574e7404ea93c0ae60e6fb61, type: 2}
+    - target: {fileID: 8462269558020113887, guid: 25b36dd800bf60d419ba0af7f9e95614, type: 3}
+      propertyPath: 'potionSheet.Array.data[4]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 1d0f9cca3aba92a41a08ec0f19bec67b, type: 2}
+    - target: {fileID: 8462269558020113887, guid: 25b36dd800bf60d419ba0af7f9e95614, type: 3}
+      propertyPath: 'potionSheet.Array.data[5]'
       value: 
       objectReference: {fileID: 11400000, guid: 4049314c1ac9cb2438da9e94d6d275f4, type: 2}
     - target: {fileID: 8733661803310067381, guid: 25b36dd800bf60d419ba0af7f9e95614, type: 3}
