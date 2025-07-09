@@ -21,44 +21,53 @@ public class playerController : MonoBehaviour
     private Transform holdingObject;
     private bool holding = false;
     private int score;
+    private CharacterController controller;
+
+    public bool canMove = true;
+    
+    public void EnableControl(bool enable)
+    {
+        canMove = enable;
+    }
 
     void Awake()
     {
-  
+        controller = GetComponent<CharacterController>();
     }
+
 
     // Update is called once per frame
     void Update()
     {
+        if (!canMove) return;
+
         Vector2 inputVector = new Vector2(0, 0);
-        if (Input.GetKey(KeyCode.W))
-        {
-            inputVector.y = +1;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            inputVector.y = -1;
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            inputVector.x = -1;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            inputVector.x = +1;
-        }
+        if (Input.GetKey(KeyCode.W)) inputVector.y = +1;
+        if (Input.GetKey(KeyCode.S)) inputVector.y = -1;
+        if (Input.GetKey(KeyCode.A)) inputVector.x = -1;
+        if (Input.GetKey(KeyCode.D)) inputVector.x = +1;
+
         inputVector = inputVector.normalized;
         Vector3 movedir = new Vector3(inputVector.x, 0f, inputVector.y);
 
+        controller.Move(movedir * movespeed * Time.deltaTime);
 
-        float playerSize = 0.7f;
-        bool hit = Physics.Raycast(transform.position, movedir, playerSize);
-         if (Physics.Raycast(transform.position, lastInterecdir, out RaycastHit raycasthit, playerSize))
+        if (movedir != Vector3.zero)
+        {
+            transform.forward = Vector3.Slerp(transform.forward, movedir, Time.deltaTime * rotatespeed);
+            isWalking = true;
+            lastInterecdir = movedir;
+        }
+        else
+        {
+            isWalking = false;
+        }
+        if (Physics.Raycast(transform.position, lastInterecdir, out RaycastHit raycasthit, 1f))
         {
             if (raycasthit.transform.tag == "tp1")
 
             {
-                hit = false;
+           
                 transform.position = new Vector3(225.19f, 1.743f, 358.6f);
             }
 
@@ -82,7 +91,7 @@ public class playerController : MonoBehaviour
 
             {
                 Debug.Log("cheese");
-                hit = false;
+         
                 if (!holding)
                 {
                     raycasthit.transform.SetParent(holdObject);
@@ -98,7 +107,7 @@ public class playerController : MonoBehaviour
 
             {
                 Debug.Log("knife");
-                hit = false;
+       
                 if (!holding)
                 {
                     raycasthit.transform.SetParent(holdObject);
@@ -113,7 +122,7 @@ public class playerController : MonoBehaviour
 
             {
                 Debug.Log("PAN");
-                hit = false;
+               
                 if (!holding)
                 {
                     raycasthit.transform.SetParent(holdObject);
@@ -128,22 +137,7 @@ public class playerController : MonoBehaviour
 
         //Debug.Log(hit);
 
-        if (!hit)
-        {
-            transform.position += movedir * movespeed * Time.deltaTime;
-        }
-        transform.forward = Vector3.Slerp(transform.forward, movedir, Time.deltaTime * rotatespeed);
-
-
-        if (movedir != Vector3.zero)
-        {
-            isWalking = true;
-            lastInterecdir = movedir;
-        }
-        else
-        {
-            isWalking = false;
-        }
+      
     }
 
     public void CreatePrefeb()

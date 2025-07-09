@@ -20,6 +20,8 @@ public class CardsController : MonoBehaviour
     [SerializeField] private string triggerMessage;
     [SerializeField] public TextAnimation textToUse;
 
+
+
     public GameObject targetUI;
 
     Card firstSelected;
@@ -27,6 +29,7 @@ public class CardsController : MonoBehaviour
 
     int matchCounts;
 
+    playerController playerController;
 
     AudioManager audioManager;
 
@@ -36,6 +39,8 @@ public class CardsController : MonoBehaviour
     }
     private void Start()
     {
+        playerController = GameObject.FindWithTag("Player").GetComponent<playerController>();
+        playerController.EnableControl(false);
         PrepareSprites();
        CreateCards();
     }
@@ -89,7 +94,7 @@ public class CardsController : MonoBehaviour
     }
     IEnumerator CheckMatching(Card a, Card b)
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.4f);
 
         if (a.iconSprite == b.iconSprite)
         {
@@ -103,9 +108,10 @@ public class CardsController : MonoBehaviour
                 textManager.LastUsed = textToUse;
                 textManager.ShowInputText(triggerMessage);
                 PrimeTween.Sequence.Create()
-                    .Chain(PrimeTween.Tween.Scale(gridTransform, Vector3.one * 1.2f, 0.2f, ease: PrimeTween.Ease.OutBack))
+                    .Chain(PrimeTween.Tween.Scale(gridTransform, Vector3.one * 1.5f, 0.2f, ease: PrimeTween.Ease.OutBack))
                     .Chain(PrimeTween.Tween.Scale(gridTransform, Vector3.one, 0.1f));
 
+            
 
                 StartCoroutine(HideUI());
 
@@ -129,9 +135,22 @@ public class CardsController : MonoBehaviour
 
         targetUI.SetActive(false);
 
-
+        if (playerController != null)
+            playerController.EnableControl(true);
     }
 
+
+    public void RestartSequenceFromTrigger()
+    {
+       // remove object before
+        foreach (Transform child in gridTransform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        PrepareSprites();
+        CreateCards();
+    }
 
 
     void ShuffleSprites(List<Sprite> spriteslist)
