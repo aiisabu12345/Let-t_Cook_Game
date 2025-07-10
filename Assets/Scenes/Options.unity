@@ -421,14 +421,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+  m_Color: {r: 0.8901961, g: 0.8901961, b: 0.8901961, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 63c14290341e1df4da3e538bba932a8b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -504,7 +504,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.52156866}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1353,6 +1353,8 @@ MonoBehaviour:
   SFXSource: {fileID: 1589050564}
   background: {fileID: 8300000, guid: 44b21965a87ff2a4eb6f63b9afbc7ae4, type: 3}
   btn: {fileID: 8300000, guid: a0f94891533edbb4396fbd3688369804, type: 3}
+  correct: {fileID: 8300000, guid: cef07151500cd5946ad616560e619431, type: 3}
+  winner: {fileID: 8300000, guid: 30d0e7e81a46a074e845ebc89e343987, type: 3}
   walk: {fileID: 0}
   pick: {fileID: 0}
 --- !u!4 &1468944179
