@@ -56,18 +56,18 @@ public class ArrowInputUI : MonoBehaviour
 
     void GenerateArrowSequence()
     {
-        List<int> sequence = new List<int> { 0, 1, 2, 3 };
-        // สลับลำดับแบบสุ่ม
-        for (int i = sequence.Count - 1; i > 0; i--)
+        List<int> sequence = new List<int>();
+
+        for (int i = 0; i < sequenceLength; i++)
         {
-            sequence.Add(UnityEngine.Random.Range(0, sequenceLength));
-         
+            int direction = UnityEngine.Random.Range(0, 4); // สุ่มระหว่าง 0 ถึง 3
+            sequence.Add(direction);
         }
 
         // สร้าง UI ลูกศร
         foreach (Transform child in arrowContainer)
         {
-            Destroy(child.gameObject); 
+            Destroy(child.gameObject);
         }
         arrows.Clear();
 
@@ -75,7 +75,7 @@ public class ArrowInputUI : MonoBehaviour
         {
             GameObject arrowObj = Instantiate(arrowPrefab, arrowContainer);
             ArrowIcon icon = arrowObj.GetComponent<ArrowIcon>();
-            icon.SetArrow(arrowSprite, sequence[i]);
+            icon.SetArrow(arrowSprite, sequence[i]); // ใช้ direction ที่ถูกต้อง
             arrows.Add(icon);
         }
 

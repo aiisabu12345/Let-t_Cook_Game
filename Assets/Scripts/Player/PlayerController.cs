@@ -11,6 +11,7 @@ public class playerController : MonoBehaviour
     private float movespeed = 7f;
     private float rotatespeed = 10f;
     public bool isWalking;
+    private bool isLifting = false;
     private Vector3 lastInterecdir;
     [SerializeField] private Transform cheese_clearcounter;
     [SerializeField] private Transform knife_clearcounter;
@@ -23,6 +24,7 @@ public class playerController : MonoBehaviour
     private int score;
     private CharacterController controller;
 
+    Animator animator;
     public bool canMove = true;
     
     public void EnableControl(bool enable)
@@ -33,6 +35,7 @@ public class playerController : MonoBehaviour
     void Awake()
     {
         controller = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();
     }
 
 
@@ -50,18 +53,41 @@ public class playerController : MonoBehaviour
         inputVector = inputVector.normalized;
         Vector3 movedir = new Vector3(inputVector.x, 0f, inputVector.y);
 
+       
+        // E to lift
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            // วน มา true , false เรื่อยๆ
+            isLifting = !isLifting;
+            animator.SetBool("lift-idle", isLifting);
+            animator.SetBool("lift-walk", false); 
+        }
+
+
         controller.Move(movedir * movespeed * Time.deltaTime);
 
         if (movedir != Vector3.zero)
         {
+
             transform.forward = Vector3.Slerp(transform.forward, movedir, Time.deltaTime * rotatespeed);
             isWalking = true;
             lastInterecdir = movedir;
+          
         }
         else
         {
             isWalking = false;
         }
+        animator.SetBool("walk", isWalking);
+
+        //islift
+        if (isLifting)
+        {
+            animator.SetBool("lift-walk", isWalking);
+        }
+
+
+
         if (Physics.Raycast(transform.position, lastInterecdir, out RaycastHit raycasthit, 1f))
         {
             if (raycasthit.transform.tag == "tp1")

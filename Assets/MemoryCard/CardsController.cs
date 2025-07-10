@@ -60,13 +60,16 @@ public class CardsController : MonoBehaviour
     
     void CreateCards()
     {
-        for(int i = 0; i < spritesList.Count; i++)
+      
+
+        for (int i = 0; i < spritesList.Count; i++)
         {
-            Card card = Instantiate(cardPrefab,gridTransform);
+            Card card = Instantiate(cardPrefab, gridTransform);
             card.SetIconSprite(spritesList[i]);
             card.controller = this;
         }
     }
+ 
 
     public void SetSelected(Card card)
     {
@@ -111,8 +114,8 @@ public class CardsController : MonoBehaviour
                     .Chain(PrimeTween.Tween.Scale(gridTransform, Vector3.one * 1.5f, 0.2f, ease: PrimeTween.Ease.OutBack))
                     .Chain(PrimeTween.Tween.Scale(gridTransform, Vector3.one, 0.1f));
 
-            
 
+       
                 StartCoroutine(HideUI());
 
             }
@@ -132,7 +135,7 @@ public class CardsController : MonoBehaviour
     {
         
         yield return new WaitForSeconds(1.3f);
-
+        RestartSequenceFromTrigger();
         targetUI.SetActive(false);
 
         if (playerController != null)
@@ -142,27 +145,45 @@ public class CardsController : MonoBehaviour
 
     public void RestartSequenceFromTrigger()
     {
-       // remove object before
+        StopAllCoroutines(); 
         foreach (Transform child in gridTransform)
         {
             Destroy(child.gameObject);
         }
 
+        firstSelected = null;
+        secondSelected = null;
+        matchCounts = 0;
+
+        if (playerController != null)
+        {
+            playerController.EnableControl(false);
+        }
+
+        if (!targetUI.activeSelf)
+        {
+            targetUI.SetActive(true);
+        }
+
         PrepareSprites();
         CreateCards();
+
     }
+   
 
 
     void ShuffleSprites(List<Sprite> spriteslist)
     {
-       for (int i = spriteslist.Count; i > 0;i--)
+        for (int i = spriteslist.Count - 1; i > 0; i--)
         {
             int randomIndex = Random.Range(0, i + 1);
 
-            Sprite temp = spriteslist[1];
-            spritesList[1] = spriteslist[randomIndex];
+            Sprite temp = spriteslist[i];
+            spriteslist[i] = spriteslist[randomIndex];
             spriteslist[randomIndex] = temp;
         }
+
+
     }
 
 }

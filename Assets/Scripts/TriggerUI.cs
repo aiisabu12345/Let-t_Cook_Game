@@ -36,10 +36,8 @@ public class TriggerUI : MonoBehaviour
                 
                 arrowUI.RestartSequenceFromTrigger(); 
             }
-            if(cardsUI != null)
-            {
-                cardsUI.RestartSequenceFromTrigger();
-            }
+
+         
             
         }
     }
