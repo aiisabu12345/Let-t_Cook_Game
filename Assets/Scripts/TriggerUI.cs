@@ -8,13 +8,15 @@ public class TriggerUI : MonoBehaviour
     [SerializeField] private string triggerMessage;
     [SerializeField] public TextAnimation textToUse;
     public GameObject UIPanel;
-
+    public bool isresetCountdown = false;
     playerController playerMovement;
+    public ArrowInputUI arrowinput;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
+           
             playerMovement = GameObject.FindWithTag("Player").GetComponent<playerController>();
             playerMovement.EnableControl(false);
             if (textManager != null && textToUse != null)
@@ -24,21 +26,34 @@ public class TriggerUI : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("TextManager หรือ TextToUse ยังไม่ถูกเซ็ตใน Inspector");
+                Debug.LogWarning("TextManager fail");
             }
 
             UIPanel.SetActive(true);
 
             ArrowInputUI arrowUI = FindObjectOfType<ArrowInputUI>();
-            CardsController cardsUI = FindObjectOfType<CardsController>();
+      
             if (arrowUI != null)
             {
                 
                 arrowUI.RestartSequenceFromTrigger(); 
             }
 
-         
-            
+
+            isresetCountdown = true;
+            resetCountDown();
+
+
+
         }
     }
+    public void resetCountDown()
+    {
+
+        if (isresetCountdown)
+        {
+            arrowinput.resetCountdown();
+        }
     }
+
+}

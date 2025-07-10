@@ -16,7 +16,7 @@ public class playerController : MonoBehaviour
     [SerializeField] private Transform cheese_clearcounter;
     [SerializeField] private Transform knife_clearcounter;
     [SerializeField] private Transform PAN_clearcounter;
-    [SerializeField] private GameObject chesse;
+    [SerializeField] private GameObject potion;
     //[SerializeField] private GameObject cheese;
     [SerializeField] private Transform holdObject;
     private Transform holdingObject;
@@ -113,18 +113,15 @@ public class playerController : MonoBehaviour
                     movespeed = 7f;
                 }
             }
-            else if (raycasthit.transform.tag == "cheese" && !holding)
+            else if (raycasthit.transform.tag == "potion" && !holding)
 
             {
-                Debug.Log("cheese");
+                Debug.Log("potion");
          
                 if (!holding)
                 {
-                    raycasthit.transform.SetParent(holdObject);
-                    //ตำแหน่งobject ที่ถือให้อยู่ตำแหน่ง 0 
-                    raycasthit.transform.localPosition = Vector3.zero;
-                    holding = true;
-                    holdingObject = raycasthit.transform;
+                    PickupItem(raycasthit.transform);
+                   
                 
 
                 }
@@ -136,6 +133,7 @@ public class playerController : MonoBehaviour
        
                 if (!holding)
                 {
+
                     raycasthit.transform.SetParent(holdObject);
                     raycasthit.transform.localPosition = Vector3.zero;
                     holding = true;
@@ -169,7 +167,7 @@ public class playerController : MonoBehaviour
     public void CreatePrefeb()
     {
         // สร้างลิสต์ของแท็กที่ต้องการใช้
-        string[] tags = { "cheese", "knife", "PAN" };
+        string[] tags = { "potion", "knife", "PAN" };
 
         GameObject prefabToSpawn = null;
 
@@ -193,7 +191,7 @@ public class playerController : MonoBehaviour
             int randomPrefab = Random.Range(0, 2);
             if (randomPrefab == 1)
             {
-                prefabToSpawn = chesse;
+                prefabToSpawn = potion;
             }
             // สร้าง instance ของ prefab
             Instantiate(prefabToSpawn, randomPosition, Quaternion.identity);
@@ -202,8 +200,25 @@ public class playerController : MonoBehaviour
         {
             Debug.LogWarning("No object with specified tags found in the scene.");
         }
-    } 
-    
+    }
+
+    private void PickupItem(Transform item)
+    {
+        item.SetParent(holdObject);
+
+        // ให้วาร์ปเป๊ะไปตำแหน่ง holdObject
+        item.localPosition = Vector3.zero;
+        item.localRotation = Quaternion.identity;
+        item.localScale = Vector3.one; // ถ้า scale ของ prefab ไม่ผิดเพี้ยน
+
+        holding = true;
+        holdingObject = item;
+
+        isLifting = true;
+        animator.SetBool("lift-idle", isLifting);
+    }
+
+
 
     public bool Iswalking()
     {

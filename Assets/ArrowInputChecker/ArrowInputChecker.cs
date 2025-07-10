@@ -20,8 +20,20 @@ public class ArrowInputUI : MonoBehaviour
 
 
     [SerializeField] private ExampleTextManager textManager;
-    [SerializeField] private string triggerMessage;
+    [Header("---Text Trigger---")]
+    [SerializeField] private string triggerMessageWinner;
+    [SerializeField] private string triggerMessageLose;
+    [Header("---Text use anim---")]
     [SerializeField] public TextAnimation textToUse;
+    [SerializeField] public TextAnimation textToUseLose;
+
+
+    [Header("--Timer---")]
+    [SerializeField] private float timeLimit = 10f; 
+    [SerializeField] private Text timerText;
+    private float timeRemaining;
+    private bool isTimerRunning = false;
+
 
     public GameObject UIPanel;
     List<ArrowIcon> arrows = new List<ArrowIcon>();
@@ -38,10 +50,12 @@ public class ArrowInputUI : MonoBehaviour
     }
     void Start()
     {
+       
         playerController = GameObject.FindWithTag("Player").GetComponent<playerController>();
         playerController.EnableControl(false);
 
         GenerateArrowSequence();
+   
     }
 
     void Update()
@@ -60,7 +74,7 @@ public class ArrowInputUI : MonoBehaviour
 
         for (int i = 0; i < sequenceLength; i++)
         {
-            int direction = UnityEngine.Random.Range(0, 4); // สุ่มระหว่าง 0 ถึง 3
+            int direction = UnityEngine.Random.Range(0, 4); // สุ่มทั้ง 4 แบบ
             sequence.Add(direction);
         }
 
@@ -75,7 +89,7 @@ public class ArrowInputUI : MonoBehaviour
         {
             GameObject arrowObj = Instantiate(arrowPrefab, arrowContainer);
             ArrowIcon icon = arrowObj.GetComponent<ArrowIcon>();
-            icon.SetArrow(arrowSprite, sequence[i]); // ใช้ direction ที่ถูกต้อง
+            icon.SetArrow(arrowSprite, sequence[i]); 
             arrows.Add(icon);
         }
 
@@ -97,13 +111,17 @@ public class ArrowInputUI : MonoBehaviour
                    .Chain(PrimeTween.Tween.Scale(arrowContainer, Vector3.one, 0.1f));
                 audioManager.PlaySFX(audioManager.winner);
                 textManager.LastUsed = textToUse;
-                textManager.ShowInputText(triggerMessage);
+                textManager.ShowInputText(triggerMessageWinner);
+                
                 StartCoroutine(closeUI());
                
             }
         }
         else
         {
+
+            textManager.LastUsed = textToUseLose;
+            textManager.ShowInputText(triggerMessageLose);
             isInputLocked = true;
 
             arrows[currentIndex].Shake();
@@ -115,7 +133,9 @@ public class ArrowInputUI : MonoBehaviour
 
         GenerateArrowSequence();
         currentIndex = 0;
-        isInputLocked = false; 
+        isInputLocked = false;
+        StopAllCoroutines(); 
+  
     }
 
     IEnumerator closeUI()
@@ -124,10 +144,50 @@ public class ArrowInputUI : MonoBehaviour
         isInputLocked = false;
         UIPanel.SetActive(false);
 
+
         if (playerController != null)
             playerController.canMove = true;
 
     }
+
+    public void resetCountdown()
+    {
+
+        timeRemaining = timeLimit;
+        StartCoroutine(StartCountdown());
+    }
+
+    // CountDown
+    IEnumerator StartCountdown()
+    {
+
+        timeRemaining = timeLimit;
+
+        isTimerRunning = true;
+
+        while (timeRemaining > 0 && !isInputLocked)
+        {
+
+            timeRemaining -= Time.deltaTime;
+
+            timerText.text = "TIME : " + Mathf.Ceil(timeRemaining).ToString();
+
+            yield return null;
+        }
+
+        if (!isInputLocked)
+        {
+
+            isTimerRunning = false;
+            isInputLocked = true;
+
+            textManager.LastUsed = textToUseLose;
+            textManager.ShowInputText(triggerMessageLose);
+
+            StartCoroutine(closeUI());
+        }
+    }
+
 }
 
 
