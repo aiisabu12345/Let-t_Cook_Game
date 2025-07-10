@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a65bf8df4785ad648a4f84a2f5f27077, type: 3}
+  m_Name: RankB
+  m_EditorClassIdentifier: 
+  partyUI: {fileID: 7612170541981727713, guid: 572bdb9787b5df34e923e574a23f1832, type: 3}
+  partyHireUI: {fileID: 3557133963465702362, guid: d7888ae840f4aac4d905cd11e2910023, type: 3}
+  minTier: 0
+  maxTier: 0
+  min: 1
+  max: 3
+  rate1: 100
+  rate2: 0
+  timeReward: 1
+  timerText: {fileID: 0}

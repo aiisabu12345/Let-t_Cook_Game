@@ -932,11 +932,11 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 0f45a43d-a1a4-45c0-8597-bce7903ef796
+  cloudProjectId: a6aaaded-1271-4a1a-9d48-8d5c10438145
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: UIletcooked
-  organizationId: lolrunggeza
+  projectName: test_project
+  organizationId: siwkogod
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
