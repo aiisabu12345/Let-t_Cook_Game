@@ -8,11 +8,12 @@ TagManager:
   - CinemachineTarget
   - camera
   - block
+  - potion
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Volume
   - Water
   - UI
   - 

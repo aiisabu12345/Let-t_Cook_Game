@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using static UnityEngine.GraphicsBuffer;
 using AnimatedBattleText.Examples;
 using PixelBattleText;
+using UnityEngine.UI;
 
 public class CardsController : MonoBehaviour
 {
@@ -17,9 +18,22 @@ public class CardsController : MonoBehaviour
 
 
     [SerializeField] private ExampleTextManager textManager;
-    [SerializeField] private string triggerMessage;
+    [Header("---Text Trigger---")]
+    [SerializeField] private string triggerMessageWinner;
+    [SerializeField] private string triggerMessageLose;
+    [Header("---Text use anim---")]
     [SerializeField] public TextAnimation textToUse;
+    [SerializeField] public TextAnimation textToUseLose;
 
+
+    private Coroutine countdownCoroutine;
+    bool isInputLocked = false;
+
+    [Header("--Timer---")]
+    [SerializeField] private float timeLimit = 5f;
+    [SerializeField] private Text timerText;
+    private float timeRemaining;
+    private bool isTimerRunning = false;
 
 
     public GameObject targetUI;
@@ -43,6 +57,7 @@ public class CardsController : MonoBehaviour
         playerController.EnableControl(false);
         PrepareSprites();
        CreateCards();
+    
     }
     private void PrepareSprites()
     {
@@ -60,17 +75,23 @@ public class CardsController : MonoBehaviour
     
     void CreateCards()
     {
-        for(int i = 0; i < spritesList.Count; i++)
+      
+
+        for (int i = 0; i < spritesList.Count; i++)
         {
-            Card card = Instantiate(cardPrefab,gridTransform);
+            Card card = Instantiate(cardPrefab, gridTransform);
             card.SetIconSprite(spritesList[i]);
             card.controller = this;
         }
     }
+ 
 
     public void SetSelected(Card card)
     {
-        if(card.isSelected == false)
+
+
+        if (isInputLocked) return;
+        if (card.isSelected == false)
         {
             card.Show();
             // เลือกอันแรกเสร้จ ก้เด้งออก
@@ -94,6 +115,7 @@ public class CardsController : MonoBehaviour
     }
     IEnumerator CheckMatching(Card a, Card b)
     {
+        
         yield return new WaitForSeconds(0.4f);
 
         if (a.iconSprite == b.iconSprite)
@@ -106,12 +128,13 @@ public class CardsController : MonoBehaviour
                 // ตอนเก็บครบแล้ว จะให้ทำไร ในนี้เลย
                 audioManager.PlaySFX(audioManager.winner);
                 textManager.LastUsed = textToUse;
-                textManager.ShowInputText(triggerMessage);
+                textManager.ShowInputText(triggerMessageWinner);
                 PrimeTween.Sequence.Create()
                     .Chain(PrimeTween.Tween.Scale(gridTransform, Vector3.one * 1.5f, 0.2f, ease: PrimeTween.Ease.OutBack))
                     .Chain(PrimeTween.Tween.Scale(gridTransform, Vector3.one, 0.1f));
 
-            
+                resetCountdown();
+
 
                 StartCoroutine(HideUI());
 
@@ -132,7 +155,7 @@ public class CardsController : MonoBehaviour
     {
         
         yield return new WaitForSeconds(1.3f);
-
+        RestartSequenceFromTrigger();
         targetUI.SetActive(false);
 
         if (playerController != null)
@@ -142,26 +165,91 @@ public class CardsController : MonoBehaviour
 
     public void RestartSequenceFromTrigger()
     {
-       // remove object before
+        
+        StopAllCoroutines();
+        isInputLocked = false;
+        isTimerRunning = false;
+        timeRemaining = timeLimit;
         foreach (Transform child in gridTransform)
         {
             Destroy(child.gameObject);
         }
 
+        firstSelected = null;
+        secondSelected = null;
+        matchCounts = 0;
+
+        if (playerController != null)
+        {
+            playerController.EnableControl(false);
+        }
+
+        if (!targetUI.activeSelf)
+        {
+            targetUI.SetActive(true);
+        }
+    
+   
+
         PrepareSprites();
         CreateCards();
+        
+ 
+
+
     }
+   
 
 
     void ShuffleSprites(List<Sprite> spriteslist)
     {
-       for (int i = spriteslist.Count; i > 0;i--)
+        for (int i = spriteslist.Count - 1; i > 0; i--)
         {
             int randomIndex = Random.Range(0, i + 1);
 
-            Sprite temp = spriteslist[1];
-            spritesList[1] = spriteslist[randomIndex];
+            Sprite temp = spriteslist[i];
+            spriteslist[i] = spriteslist[randomIndex];
             spriteslist[randomIndex] = temp;
+        }
+
+
+    }
+    public void resetCountdown()
+    {
+      
+        timeRemaining = timeLimit;
+
+        StartCoroutine(StartCountdown());
+    }
+    // CountDown
+    IEnumerator StartCountdown()
+    {
+        
+        timeRemaining = timeLimit;
+    
+      // isInputLocked = false;
+        isTimerRunning = true;
+
+        while (timeRemaining > 0 && !isInputLocked)
+        {
+            
+            timeRemaining -= Time.deltaTime;
+          
+            timerText.text = "TIME : " + Mathf.Ceil(timeRemaining).ToString();
+            
+            yield return null;
+        }
+
+        if (!isInputLocked)
+        {
+
+            isTimerRunning = false;
+            isInputLocked = true;
+
+            textManager.LastUsed = textToUseLose;
+            textManager.ShowInputText(triggerMessageLose);
+
+            StartCoroutine(HideUI());
         }
     }
 
