@@ -66,5 +66,5 @@
     "explorer.fileNesting.patterns": {
         "*.sln": "*.csproj"
     },
-    "dotnet.defaultSolution": "Let-t_Cook_Game.sln"
+    "dotnet.defaultSolution": "Let-t_Cook_Game_new.sln"
 }

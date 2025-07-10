@@ -40,6 +40,7 @@ public class PanelManager : MonoBehaviour
             button.material = m;
             button.icon.sprite = m.icon;
             button.bg.sprite = InventoryManager.Instance.bg[m.tier];
+            Debug.Log("tier=================" + m.tier);
         }
     }
 }
