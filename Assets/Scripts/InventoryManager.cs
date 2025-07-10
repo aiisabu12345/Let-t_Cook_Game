@@ -37,9 +37,25 @@ public class InventoryManager : MonoBehaviour
         newPotion.icon = originPotion.icon;
         newPotion.status = status;
         newPotion.tier = tier;
+
+        if (tier == 0)
+        {
+            newPotion.price = Random.Range(10, 20);
+        }
+        else if (tier == 1)
+        {
+            newPotion.price = Random.Range(30, 40);
+        }
+        else
+        {
+            newPotion.price = Random.Range(50, 60);
+        }
+
+        newPotion.price = Mathf.Pow(newPotion.price, newPotion.status.Count);
+        //newPotion.price = newPotion.price^newPotion.status.Count;
+
         potionList.Add(newPotion);
-        Debug.Log("add " + newPotion.potionName);
-        Debug.Log("work");
+        Debug.Log("add " + newPotion.potionName+" price: "+newPotion.price);
     }
 
     public void AddMaterial(int m,int tier)

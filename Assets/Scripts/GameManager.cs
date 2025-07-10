@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,6 +11,9 @@ public class GameManager : MonoBehaviour
     public GatheringManager gatheringManager;
     public GameObject potionCraft;
     public PotionCraftManager potionCraftManager;
+    public GameObject sellPanel;
+    public SellManager sellManager;
+    public float cocoCoin = 0;
 
 
     void Awake()
@@ -41,6 +46,12 @@ public class GameManager : MonoBehaviour
         {
             potionCraft.SetActive(!potionCraft.activeSelf);
             potionCraftManager.SetMaterialCraft();
+        }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            sellPanel.SetActive(!sellPanel.activeSelf);
+            sellManager.OnOpen();
         }
     }
 }

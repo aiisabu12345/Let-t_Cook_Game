@@ -9,5 +9,6 @@ public class PotionData : ScriptableObject
     public Sprite icon;
     public string potionName;
     public List<string> status;
+    public float price;
     public int tier;
 }

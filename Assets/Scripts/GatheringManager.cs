@@ -78,7 +78,7 @@ public class GatheringManager : MonoBehaviour
 
                 if (!onIdlePanel)
                     SetPartyHire();
-                else if (PotionCraftManager.Instance.gameObject.activeSelf)
+                else if (GameManager.Instance.potionCraft.activeSelf)
                     PotionCraftManager.Instance.SetMaterialCraft();
 
             }

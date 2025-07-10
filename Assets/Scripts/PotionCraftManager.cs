@@ -79,19 +79,7 @@ public class PotionCraftManager : MonoBehaviour
         List<string> status = new List<string>();
         for (int i = 0; i < materialSelect.Count; i++)
         {
-            int flag = 1;
-            for (int j = 0; j < status.Count; j++)
-            {
-                if (materialSelect[i].status == status[j])
-                {
-                    flag = 0;
-                }
-            }
-
-            if (flag == 1)
-            {
-                status.Add(materialSelect[i].status);
-            }
+            status.Add(materialSelect[i].status);
         }
 
         int rand = Random.Range(0, materialSelect.Count);

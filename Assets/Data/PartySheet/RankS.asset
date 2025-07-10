@@ -20,5 +20,5 @@ MonoBehaviour:
   max: 5
   rate1: 30
   rate2: 0
-  timeReward: 1
+  timeReward: 10
   timerText: {fileID: 0}
