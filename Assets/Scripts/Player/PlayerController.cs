@@ -16,7 +16,7 @@ public class playerController : MonoBehaviour
     [SerializeField] private Transform cheese_clearcounter;
     [SerializeField] private Transform knife_clearcounter;
     [SerializeField] private Transform PAN_clearcounter;
-    [SerializeField] private GameObject potion;
+    //[SerializeField] private GameObject potion;
     //[SerializeField] private GameObject cheese;
     [SerializeField] private Transform holdObject;
     private Transform holdingObject;
@@ -117,13 +117,10 @@ public class playerController : MonoBehaviour
 
             {
                 Debug.Log("potion");
-         
-                if (!holding)
+
+                if (raycasthit.transform.parent == null || raycasthit.transform.parent.tag != "Player")
                 {
                     PickupItem(raycasthit.transform);
-                   
-                
-
                 }
             }
             if (raycasthit.transform.tag == "knife" && !holding)
@@ -189,12 +186,13 @@ public class playerController : MonoBehaviour
                 Random.Range(-5, 5)
             );
             int randomPrefab = Random.Range(0, 2);
-            if (randomPrefab == 1)
+           /* if (randomPrefab == 1)
             {
                 prefabToSpawn = potion;
-            }
+            }*/
             // สร้าง instance ของ prefab
             Instantiate(prefabToSpawn, randomPosition, Quaternion.identity);
+          
         }
         else
         {

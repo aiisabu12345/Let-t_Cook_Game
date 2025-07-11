@@ -141,6 +141,7 @@ public class CardsController : MonoBehaviour
             }
             else
             {
+
                 audioManager.PlaySFX(audioManager.correct);
             }
         }
@@ -246,6 +247,7 @@ public class CardsController : MonoBehaviour
             isTimerRunning = false;
             isInputLocked = true;
 
+            audioManager.PlaySFX(audioManager.lose);
             textManager.LastUsed = textToUseLose;
             textManager.ShowInputText(triggerMessageLose);
 

@@ -13,6 +13,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip correct;
     public AudioClip winner;
     public AudioClip walk;
+    public AudioClip lose;
     public AudioClip pick;
 
    
