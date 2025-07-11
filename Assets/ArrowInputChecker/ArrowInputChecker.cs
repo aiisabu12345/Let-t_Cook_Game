@@ -119,7 +119,7 @@ public class ArrowInputUI : MonoBehaviour
         }
         else
         {
-
+            audioManager.PlaySFX(audioManager.lose);
             textManager.LastUsed = textToUseLose;
             textManager.ShowInputText(triggerMessageLose);
             isInputLocked = true;

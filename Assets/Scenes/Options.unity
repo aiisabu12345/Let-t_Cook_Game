@@ -1355,7 +1355,8 @@ MonoBehaviour:
   btn: {fileID: 8300000, guid: a0f94891533edbb4396fbd3688369804, type: 3}
   correct: {fileID: 8300000, guid: cef07151500cd5946ad616560e619431, type: 3}
   winner: {fileID: 8300000, guid: 30d0e7e81a46a074e845ebc89e343987, type: 3}
-  walk: {fileID: 0}
+  walk: {fileID: 8300000, guid: 0ad7188059be3a04692684afc063f73b, type: 3}
+  lose: {fileID: 8300000, guid: 3efe0050664b5fa4f9bbf82a7b76db9d, type: 3}
   pick: {fileID: 0}
 --- !u!4 &1468944179
 Transform:
