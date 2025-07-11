@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 3584848056408598087, guid: df24ecd50373eaf419e020c169110869, type: 3}
   icon: {fileID: 21300000, guid: 9a195b82a50faf04bbe4ccd6d4a42fcd, type: 3}
-  potionName: LukPotion
+  potionName: Lucky Potion
   status:
   - luk
+  price: 0
+  tier: 0

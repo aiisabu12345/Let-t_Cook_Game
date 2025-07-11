@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public GameObject sellPanel;
     public SellManager sellManager;
     public float cocoCoin = 0;
+    public GameObject newsPanel;
 
 
     void Awake()
@@ -53,5 +54,15 @@ public class GameManager : MonoBehaviour
             sellPanel.SetActive(!sellPanel.activeSelf);
             sellManager.OnOpen();
         }
+
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            ShowNews();
+        }
+    }
+
+    public void ShowNews()
+    {
+        newsPanel.SetActive(!newsPanel.activeSelf);
     }
 }

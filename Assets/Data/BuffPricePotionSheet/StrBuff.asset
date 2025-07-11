@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: StrBuff
   m_EditorClassIdentifier: 
   status: str
-  buffPercent: 0
+  buffPercent: 50

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: IntBuff
   m_EditorClassIdentifier: 
   status: int
-  buffPercent: 0
+  buffPercent: 50

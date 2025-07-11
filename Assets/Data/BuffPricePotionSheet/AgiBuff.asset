@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: AgiBuff
   m_EditorClassIdentifier: 
   status: agi
-  buffPercent: 0
+  buffPercent: 50

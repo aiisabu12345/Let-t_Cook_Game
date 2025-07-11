@@ -7,6 +7,7 @@ using TMPro;
 public class GatheringManager : MonoBehaviour
 {
     public static GatheringManager Instance;
+    public int partyAmout = 5;
     public Transform panelTransform;
     public List<PartyData> partySheet = new List<PartyData>();
     public List<PartyData> partyIdle = new List<PartyData>();
@@ -37,7 +38,7 @@ public class GatheringManager : MonoBehaviour
 
     void Update()
     {
-        timeText.text = "Time : " + (Mathf.Round(timeCurrent * 10.0f) * 0.1f).ToString();
+        timeText.text = "Time : " + Mathf.FloorToInt(timeCurrent).ToString();
 
         timeCurrent -= Time.deltaTime;
 
@@ -89,7 +90,7 @@ public class GatheringManager : MonoBehaviour
     {
         partyIdle.Clear();
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < partyAmout; i++)
         {
             int rand = Random.Range(0, 3);
             Debug.Log(rand);

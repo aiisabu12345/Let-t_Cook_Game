@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: ChaBuff
   m_EditorClassIdentifier: 
   status: cha
-  buffPercent: 0
+  buffPercent: 50

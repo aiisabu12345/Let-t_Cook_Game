@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 3584848056408598087, guid: df24ecd50373eaf419e020c169110869, type: 3}
   icon: {fileID: 21300000, guid: 47d78d0644fb71c4abed86c438d02d19, type: 3}
-  potionName: AgiPotion
+  potionName: Speed Potion
   status:
   - agi
-  tier: 2
+  price: 0
+  tier: 0

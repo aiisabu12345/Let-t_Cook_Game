@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: LukBuff
   m_EditorClassIdentifier: 
   status: luk
-  buffPercent: 0
+  buffPercent: 50
