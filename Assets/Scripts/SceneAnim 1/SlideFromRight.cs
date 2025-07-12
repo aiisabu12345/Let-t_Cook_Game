@@ -7,9 +7,15 @@ public class SlideFromRight : MonoBehaviour
     public float slideDistance = 1000f;  // ระยะที่ slide เข้ามา (เช่น 1000 units จากขวา)
     public float duration = 0.5f;
 
-    void Start()
+    private bool hasSlidIn = false;      // flag กันไม่ให้ทำซ้ำ
+
+    private void Update()
     {
-        SlideInFromRight();
+        if (!hasSlidIn)
+        {
+            SlideInFromRight();
+            hasSlidIn = true;
+        }
     }
 
     public void SlideInFromRight()
@@ -25,5 +31,10 @@ public class SlideFromRight : MonoBehaviour
             duration: duration,
             ease: Ease.OutCubic
         );
+    }
+
+    public void ResetSlide()
+    {
+        hasSlidIn = false;
     }
 }
