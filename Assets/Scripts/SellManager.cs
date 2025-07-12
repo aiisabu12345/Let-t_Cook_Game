@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
 
-public class SellManager : MonoBehaviour
+public class SellManager : NormalFunctionForPanel
 {
     public static SellManager Instance;
     public List<PotionData> potionSelect = new List<PotionData>();
@@ -28,7 +28,7 @@ public class SellManager : MonoBehaviour
         }
     }
 
-    public void OnOpen()
+    public override void OnOpen()
     {
         SetPotionSelect();
         SetPotionSell();

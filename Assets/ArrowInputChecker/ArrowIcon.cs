@@ -1,12 +1,11 @@
 ﻿using PrimeTween;
 using UnityEngine;
 using UnityEngine.UI;
-using PrimeTween;
 
 public class ArrowIcon : MonoBehaviour
 {
     public int arrowDirection; 
-    private Image image;
+    public Image image;
 
     void Awake()
     {

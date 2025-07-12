@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3979935439574485178
+--- !u!1 &3316117533160468337
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,40 +8,49 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8733661803310067381}
-  - component: {fileID: 8462269558020113887}
+  - component: {fileID: 1988675059235966332}
+  - component: {fileID: 632857377018525921}
   m_Layer: 0
-  m_Name: InventoryManager
+  m_Name: GameManager (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8733661803310067381
+--- !u!4 &1988675059235966332
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3979935439574485178}
+  m_GameObject: {fileID: 3316117533160468337}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -40.58628, y: 0.5, z: -27.47888}
+  m_LocalPosition: {x: -34.1656, y: 8.33, z: 23.88142}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8462269558020113887
+--- !u!114 &632857377018525921
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3979935439574485178}
+  m_GameObject: {fileID: 3316117533160468337}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcfbac72d0f0b104e95ed5bc7693bba2, type: 3}
+  m_Script: {fileID: 11500000, guid: 3ab2a0264494be24986cf2db16b4236a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  potionList: []
+  inventoryPanel: {fileID: 0}
+  panelManager: {fileID: 0}
+  gatheringPanel: {fileID: 0}
+  gatheringManager: {fileID: 0}
+  potionCraft: {fileID: 0}
+  potionCraftManager: {fileID: 0}
+  sellPanel: {fileID: 0}
+  sellManager: {fileID: 0}
+  cocoCoin: 0
+  newsPanel: {fileID: 0}

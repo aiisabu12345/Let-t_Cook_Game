@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3014912765678498636
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1220680760079926471}
+  - component: {fileID: 110496081378461751}
+  m_Layer: 0
+  m_Name: InventoryManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1220680760079926471
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3014912765678498636}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -34.1656, y: 8.33, z: 23.88142}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &110496081378461751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3014912765678498636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcfbac72d0f0b104e95ed5bc7693bba2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  materialList: []
+  materialSheet:
+  - {fileID: 11400000, guid: f3a094655f8b6e3469bd0eebfd3991a9, type: 2}
+  - {fileID: 11400000, guid: e781bb517f807fb42ab8bcd0e0af93fa, type: 2}
+  - {fileID: 11400000, guid: 16fab50cfeccdf64582ff1715119abab, type: 2}
+  - {fileID: 11400000, guid: 298352d9fcc70d6409132b5c9a422867, type: 2}
+  - {fileID: 11400000, guid: 051f2ab98933527429d8c12c98977c30, type: 2}
+  potionSheet:
+  - {fileID: 11400000, guid: 4049314c1ac9cb2438da9e94d6d275f4, type: 2}
+  - {fileID: 11400000, guid: 633eae2c71df81a479409beaa4f36b3b, type: 2}
+  - {fileID: 11400000, guid: 378ecc8a9c7d91444a75acc5f9134d97, type: 2}
+  - {fileID: 11400000, guid: 2a2849f8574e7404ea93c0ae60e6fb61, type: 2}
+  - {fileID: 11400000, guid: 1d0f9cca3aba92a41a08ec0f19bec67b, type: 2}
+  potionList: []
+  bg:
+  - {fileID: 21300000, guid: e0e0958b8c8a85d46b1a79fb20ae25bf, type: 3}
+  - {fileID: 21300000, guid: b7216ef8cb7f2224c87bf82964c7b45c, type: 3}
+  - {fileID: 21300000, guid: 3771e244ce9bfd04da066d1526519331, type: 3}

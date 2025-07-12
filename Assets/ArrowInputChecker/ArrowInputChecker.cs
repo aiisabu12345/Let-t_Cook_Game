@@ -11,8 +11,8 @@ using UnityEngine.UI;
 
 public class ArrowInputUI : MonoBehaviour
 {
-    public GameObject arrowPrefab;         
-    public Transform arrowContainer;      
+    public GameObject arrowPrefab;
+    public Transform arrowContainer;
     public Sprite arrowSprite;
 
     playerController playerController;
@@ -29,10 +29,10 @@ public class ArrowInputUI : MonoBehaviour
 
 
     [Header("--Timer---")]
-    [SerializeField] private float timeLimit = 10f; 
+    [SerializeField] private float timeLimit = 10f;
     [SerializeField] private Text timerText;
     private float timeRemaining;
-    private bool isTimerRunning = false;
+    //private bool isTimerRunning = false;
 
 
     public GameObject UIPanel;
@@ -43,6 +43,8 @@ public class ArrowInputUI : MonoBehaviour
     bool isInputLocked = false;
 
     AudioManager audioManager;
+    [HideInInspector] public bool isMinigameDone = false;
+    [HideInInspector] public bool isWin = false;
 
     private void Awake()
     {
@@ -50,12 +52,12 @@ public class ArrowInputUI : MonoBehaviour
     }
     void Start()
     {
-       
+
         playerController = GameObject.FindWithTag("Player").GetComponent<playerController>();
         playerController.EnableControl(false);
 
         GenerateArrowSequence();
-   
+
     }
 
     void Update()
@@ -89,7 +91,7 @@ public class ArrowInputUI : MonoBehaviour
         {
             GameObject arrowObj = Instantiate(arrowPrefab, arrowContainer);
             ArrowIcon icon = arrowObj.GetComponent<ArrowIcon>();
-            icon.SetArrow(arrowSprite, sequence[i]); 
+            icon.SetArrow(arrowSprite, sequence[i]);
             arrows.Add(icon);
         }
 
@@ -100,32 +102,29 @@ public class ArrowInputUI : MonoBehaviour
     {
         if (input == arrows[currentIndex].arrowDirection)
         {
-       
+
             arrows[currentIndex].MarkAsCorrect();
             currentIndex++;
 
             if (currentIndex >= arrows.Count)
             {
+                isMinigameDone = true;
+                isWin = true;
+
                 PrimeTween.Sequence.Create()
                    .Chain(PrimeTween.Tween.Scale(arrowContainer, Vector3.one * 1.5f, 0.3f, ease: PrimeTween.Ease.OutBack))
                    .Chain(PrimeTween.Tween.Scale(arrowContainer, Vector3.one, 0.1f));
                 audioManager.PlaySFX(audioManager.winner);
                 textManager.LastUsed = textToUse;
                 textManager.ShowInputText(triggerMessageWinner);
-                
-                StartCoroutine(closeUI());
-               
+
+                StartCoroutine(HideUI());
+
             }
         }
         else
         {
-            audioManager.PlaySFX(audioManager.lose);
-            textManager.LastUsed = textToUseLose;
-            textManager.ShowInputText(triggerMessageLose);
-            isInputLocked = true;
-
-            arrows[currentIndex].Shake();
-            StartCoroutine(closeUI());
+            Lose();
         }
     }
     public void RestartSequenceFromTrigger()
@@ -134,11 +133,11 @@ public class ArrowInputUI : MonoBehaviour
         GenerateArrowSequence();
         currentIndex = 0;
         isInputLocked = false;
-        StopAllCoroutines(); 
-  
+        StopAllCoroutines();
+
     }
 
-    IEnumerator closeUI()
+    IEnumerator HideUI()
     {
         yield return new WaitForSeconds(1f);
         isInputLocked = false;
@@ -163,7 +162,7 @@ public class ArrowInputUI : MonoBehaviour
 
         timeRemaining = timeLimit;
 
-        isTimerRunning = true;
+        //isTimerRunning = true;
 
         while (timeRemaining > 0 && !isInputLocked)
         {
@@ -177,15 +176,23 @@ public class ArrowInputUI : MonoBehaviour
 
         if (!isInputLocked)
         {
-
-            isTimerRunning = false;
-            isInputLocked = true;
-
-            textManager.LastUsed = textToUseLose;
-            textManager.ShowInputText(triggerMessageLose);
-
-            StartCoroutine(closeUI());
+            Lose();
         }
+    }
+
+    public void Lose()
+    {
+        isInputLocked = true;
+        isMinigameDone = true;
+        isWin = false;
+
+
+        audioManager.PlaySFX(audioManager.lose);
+        textManager.LastUsed = textToUseLose;
+        textManager.ShowInputText(triggerMessageLose);
+
+        arrows[currentIndex].Shake();
+        StartCoroutine(HideUI());
     }
 
 }

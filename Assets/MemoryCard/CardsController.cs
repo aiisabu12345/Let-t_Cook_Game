@@ -33,7 +33,7 @@ public class CardsController : MonoBehaviour
     [SerializeField] private float timeLimit = 5f;
     [SerializeField] private Text timerText;
     private float timeRemaining;
-    private bool isTimerRunning = false;
+    //private bool isTimerRunning = false;
 
 
     public GameObject targetUI;
@@ -46,6 +46,8 @@ public class CardsController : MonoBehaviour
     playerController playerController;
 
     AudioManager audioManager;
+    [HideInInspector] public bool isMinigameDone = false;
+    [HideInInspector] public bool isWin = false;
 
     private void Awake()
     {
@@ -56,14 +58,14 @@ public class CardsController : MonoBehaviour
         playerController = GameObject.FindWithTag("Player").GetComponent<playerController>();
         playerController.EnableControl(false);
         PrepareSprites();
-       CreateCards();
-    
+        CreateCards();
+
     }
     private void PrepareSprites()
     {
-        spritesList = new List<Sprite>();   
+        spritesList = new List<Sprite>();
 
-        for(int i = 0; i < sprites.Length; i++)
+        for (int i = 0; i < sprites.Length; i++)
         {
             // add sprite 2 time
             spritesList.Add(sprites[i]);
@@ -72,10 +74,10 @@ public class CardsController : MonoBehaviour
         }
         ShuffleSprites(spritesList);
     }
-    
+
     void CreateCards()
     {
-      
+
 
         for (int i = 0; i < spritesList.Count; i++)
         {
@@ -84,7 +86,7 @@ public class CardsController : MonoBehaviour
             card.controller = this;
         }
     }
- 
+
 
     public void SetSelected(Card card)
     {
@@ -95,7 +97,7 @@ public class CardsController : MonoBehaviour
         {
             card.Show();
             // เลือกอันแรกเสร้จ ก้เด้งออก
-            if(firstSelected == null)
+            if (firstSelected == null)
             {
                 firstSelected = card;
                 return;
@@ -109,13 +111,13 @@ public class CardsController : MonoBehaviour
                 //รีค่า
                 firstSelected = null;
                 secondSelected = null;
-           
+
             }
         }
     }
     IEnumerator CheckMatching(Card a, Card b)
     {
-        
+
         yield return new WaitForSeconds(0.4f);
 
         if (a.iconSprite == b.iconSprite)
@@ -124,8 +126,12 @@ public class CardsController : MonoBehaviour
             // Matched
             matchCounts++;
 
-            if (matchCounts >= spritesList.Count/2f) {
+            if (matchCounts >= spritesList.Count / 2f)
+            {
                 // ตอนเก็บครบแล้ว จะให้ทำไร ในนี้เลย
+                isMinigameDone = true;
+                isWin = true;
+
                 audioManager.PlaySFX(audioManager.winner);
                 textManager.LastUsed = textToUse;
                 textManager.ShowInputText(triggerMessageWinner);
@@ -154,7 +160,7 @@ public class CardsController : MonoBehaviour
     }
     IEnumerator HideUI()
     {
-        
+
         yield return new WaitForSeconds(1.3f);
         RestartSequenceFromTrigger();
         targetUI.SetActive(false);
@@ -166,10 +172,10 @@ public class CardsController : MonoBehaviour
 
     public void RestartSequenceFromTrigger()
     {
-        
+
         StopAllCoroutines();
         isInputLocked = false;
-        isTimerRunning = false;
+        //isTimerRunning = false;
         timeRemaining = timeLimit;
         foreach (Transform child in gridTransform)
         {
@@ -189,17 +195,11 @@ public class CardsController : MonoBehaviour
         {
             targetUI.SetActive(true);
         }
-    
-   
 
         PrepareSprites();
         CreateCards();
-        
- 
-
-
     }
-   
+
 
 
     void ShuffleSprites(List<Sprite> spriteslist)
@@ -217,42 +217,47 @@ public class CardsController : MonoBehaviour
     }
     public void resetCountdown()
     {
-      
-        timeRemaining = timeLimit;
 
+        timeRemaining = timeLimit;
         StartCoroutine(StartCountdown());
     }
     // CountDown
     IEnumerator StartCountdown()
     {
-        
+
         timeRemaining = timeLimit;
-    
-      // isInputLocked = false;
-        isTimerRunning = true;
+
+        // isInputLocked = false;
+        //isTimerRunning = true;
 
         while (timeRemaining > 0 && !isInputLocked)
         {
-            
+
             timeRemaining -= Time.deltaTime;
-          
+
             timerText.text = "TIME : " + Mathf.Ceil(timeRemaining).ToString();
-            
+
             yield return null;
         }
 
         if (!isInputLocked)
         {
-
-            isTimerRunning = false;
-            isInputLocked = true;
-
-            audioManager.PlaySFX(audioManager.lose);
-            textManager.LastUsed = textToUseLose;
-            textManager.ShowInputText(triggerMessageLose);
-
-            StartCoroutine(HideUI());
+            Lose();
         }
+    }
+
+    public void Lose()
+    {
+        isInputLocked = true;
+        isMinigameDone = true;
+        isWin = false;
+
+
+        audioManager.PlaySFX(audioManager.lose);
+        textManager.LastUsed = textToUseLose;
+        textManager.ShowInputText(triggerMessageLose);
+
+        StartCoroutine(HideUI());
     }
 
 }

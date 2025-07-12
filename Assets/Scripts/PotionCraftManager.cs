@@ -12,6 +12,9 @@ public class PotionCraftManager : MonoBehaviour
     public Transform panelMaterialTransform;
     public Button craftButton;
     public GameObject itemButtonMaterial;
+    public GameObject potMinigame;
+    public GameObject cardMinigame;
+    public GameObject arrowMinigame;
     void Awake()
     {
         if (Instance == null)
@@ -76,18 +79,109 @@ public class PotionCraftManager : MonoBehaviour
 
     public void CraftPotion()
     {
-        List<string> status = new List<string>();
-        for (int i = 0; i < materialSelect.Count; i++)
+        StartCoroutine(CraftPotionCoroutine());
+    }
+
+    private IEnumerator CraftPotionCoroutine()
+    {
+        int Rand = Random.Range(0, 3);
+
+        //optimize this shit later T-T
+        //Way to optimize
+        //Add new class for minigame
+        switch (Rand)
         {
-            status.Add(materialSelect[i].status);
+            case 0:
+                PotMinigame miniGame1 = potMinigame.GetComponent<PotMinigame>();
+                miniGame1.gameObject.SetActive(true);
+                miniGame1.resetCountdown();
+
+                while (!miniGame1.isMinigameDone)
+                {
+                    yield return null;
+                }
+
+                if (miniGame1.isWin)
+                {
+                    List<string> status = new List<string>();
+                    for (int i = 0; i < materialSelect.Count; i++)
+                    {
+                        status.Add(materialSelect[i].status);
+                    }
+
+                    int rand = Random.Range(0, materialSelect.Count);
+                    int tier = materialSelect[rand].tier;
+                    InventoryManager.Instance.AddPotion(status, tier);
+                }
+
+                materialSelect.Clear();
+                SetMaterialCraft();
+                SetMaterialSelect();
+
+                // Reset flag สำหรับเล่นใหม่ครั้งหน้า
+                miniGame1.isMinigameDone = false;
+                break;
+            case 1:
+                CardsController miniGame2 = cardMinigame.GetComponent<CardsController>();
+                miniGame2.gameObject.SetActive(true);
+                miniGame2.resetCountdown();
+
+                while (!miniGame2.isMinigameDone)
+                {
+                    yield return null;
+                }
+
+                if (miniGame2.isWin)
+                {
+                    List<string> status = new List<string>();
+                    for (int i = 0; i < materialSelect.Count; i++)
+                    {
+                        status.Add(materialSelect[i].status);
+                    }
+
+                    int rand = Random.Range(0, materialSelect.Count);
+                    int tier = materialSelect[rand].tier;
+                    InventoryManager.Instance.AddPotion(status, tier);
+                }
+
+                materialSelect.Clear();
+                SetMaterialCraft();
+                SetMaterialSelect();
+
+                // Reset flag สำหรับเล่นใหม่ครั้งหน้า
+                miniGame2.isMinigameDone = false;
+                break;
+            case 2:
+                ArrowInputUI miniGame3 = arrowMinigame.GetComponent<ArrowInputUI>();
+                miniGame3.RestartSequenceFromTrigger(); 
+                miniGame3.gameObject.SetActive(true);
+                miniGame3.resetCountdown();
+
+                while (!miniGame3.isMinigameDone)
+                {
+                    yield return null;
+                }
+
+                if (miniGame3.isWin)
+                {
+                    List<string> status = new List<string>();
+                    for (int i = 0; i < materialSelect.Count; i++)
+                    {
+                        status.Add(materialSelect[i].status);
+                    }
+
+                    int rand = Random.Range(0, materialSelect.Count);
+                    int tier = materialSelect[rand].tier;
+                    InventoryManager.Instance.AddPotion(status, tier);
+                }
+
+                materialSelect.Clear();
+                SetMaterialCraft();
+                SetMaterialSelect();
+
+                // Reset flag สำหรับเล่นใหม่ครั้งหน้า
+                miniGame3.isMinigameDone = false;
+                break;
         }
-
-        int rand = Random.Range(0, materialSelect.Count);
-        int tier = materialSelect[rand].tier;
-
-        InventoryManager.Instance.AddPotion(status, tier);
-        materialSelect.Clear();
-        SetMaterialCraft();
-        SetMaterialSelect();
     }
 }

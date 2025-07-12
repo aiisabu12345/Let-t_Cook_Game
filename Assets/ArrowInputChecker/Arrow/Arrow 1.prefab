@@ -89,3 +89,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arrowDirection: 6
+  image: {fileID: 5968834872727099894}

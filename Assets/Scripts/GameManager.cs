@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public SellManager sellManager;
     public float cocoCoin = 0;
     public GameObject newsPanel;
+    playerController playerController;
 
 
     void Awake()
@@ -29,6 +30,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        playerController = GameObject.FindWithTag("Player").GetComponent<playerController>();
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
@@ -37,7 +43,7 @@ public class GameManager : MonoBehaviour
             panelManager.SetPotion();
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        /*if (Input.GetKeyDown(KeyCode.R))
         {
             gatheringPanel.SetActive(!gatheringPanel.activeSelf);
             gatheringManager.SetPartyIdle();
@@ -47,22 +53,27 @@ public class GameManager : MonoBehaviour
         {
             potionCraft.SetActive(!potionCraft.activeSelf);
             potionCraftManager.SetMaterialCraft();
-        }
+        }*/
 
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             sellPanel.SetActive(!sellPanel.activeSelf);
             sellManager.OnOpen();
         }
 
-        if (Input.GetKeyDown(KeyCode.N))
+        /*if (Input.GetKeyDown(KeyCode.N))
         {
             ShowNews();
-        }
+        }*/
     }
 
     public void ShowNews()
     {
         newsPanel.SetActive(!newsPanel.activeSelf);
+    }
+    public void ClosePanel(GameObject p)
+    {
+        p.SetActive(false);
+        playerController.EnableControl(true);
     }
 }

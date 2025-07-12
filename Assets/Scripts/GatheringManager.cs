@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
 
-public class GatheringManager : MonoBehaviour
+public class GatheringManager : NormalFunctionForPanel
 {
     public static GatheringManager Instance;
     public int partyAmout = 5;
@@ -19,6 +19,11 @@ public class GatheringManager : MonoBehaviour
     public TMP_Text goldText;
 
     public bool onIdlePanel = false;
+
+    public override void OnOpen()
+    {
+        SetPartyIdle();
+    }
 
     void Awake()
     {
