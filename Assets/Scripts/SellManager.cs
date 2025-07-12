@@ -1,8 +1,9 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
+using PrimeTween;
 
 public class SellManager : NormalFunctionForPanel
 {
@@ -15,6 +16,9 @@ public class SellManager : NormalFunctionForPanel
     public TMP_Text priceText;
     public TMP_Text cocoCoinText;
     public float sumPrice = 0;
+
+
+
     public List<BuffData> buff = new List<BuffData>();
     void Awake()
     {
@@ -113,8 +117,13 @@ public class SellManager : NormalFunctionForPanel
     {
         GameManager.Instance.cocoCoin += sumPrice;
         cocoCoinText.text = "Coco : " + GameManager.Instance.cocoCoin.ToString();
+       
         potionSelect.Clear();
         SetPotionSell();
+
         SetPotionSelect();
     }
+
+    
+    
 }
