@@ -8,7 +8,7 @@ public class AutoDeactivate : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(LoadSceneAfterSeconds(30f));
+        StartCoroutine(LoadSceneAfterSeconds(40f));
     }
 
     IEnumerator LoadSceneAfterSeconds(float seconds)
