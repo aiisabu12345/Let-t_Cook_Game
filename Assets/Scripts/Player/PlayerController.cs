@@ -21,9 +21,9 @@ public class playerController : MonoBehaviour
     Animator animator;
     public bool canMove = true;
     private Transform itemInFront;
+    private bool wasWalking = false;
 
     // ใช้สำหรับกัน Trigger ซ้ำ
-    private bool wasWalking = false;
 
     public void EnableControl(bool enable)
     {
@@ -38,52 +38,40 @@ public class playerController : MonoBehaviour
 
     void Update()
     {
-        if (!canMove)
+        if (canMove)
         {
-            animator.SetTrigger("idle");
-            return;
-        }
+            Vector2 inputVector = new Vector2(0, 0);
+            if (Input.GetKey(KeyCode.W)) inputVector.y = +1;
+            if (Input.GetKey(KeyCode.S)) inputVector.y = -1;
+            if (Input.GetKey(KeyCode.A)) inputVector.x = -1;
+            if (Input.GetKey(KeyCode.D)) inputVector.x = +1;
 
-        Vector2 inputVector = new Vector2(0, 0);
-        if (Input.GetKey(KeyCode.W)) inputVector.y = +1;
-        if (Input.GetKey(KeyCode.S)) inputVector.y = -1;
-        if (Input.GetKey(KeyCode.A)) inputVector.x = -1;
-        if (Input.GetKey(KeyCode.D)) inputVector.x = +1;
+            inputVector = inputVector.normalized;
+            Vector3 movedir = new Vector3(inputVector.x, 0f, inputVector.y);
 
-        inputVector = inputVector.normalized;
-        Vector3 movedir = new Vector3(inputVector.x, 0f, inputVector.y);
+            controller.Move(movedir * movespeed * Time.deltaTime);
 
-        controller.Move(movedir * movespeed * Time.deltaTime);
-
-        if (movedir != Vector3.zero)
-        {
-            transform.forward = Vector3.Slerp(transform.forward, movedir, Time.deltaTime * rotatespeed);
-            isWalking = true;
-            lastInterecdir = movedir;
+            if (movedir != Vector3.zero)
+            {
+                transform.forward = Vector3.Slerp(transform.forward, movedir, Time.deltaTime * rotatespeed);
+                isWalking = true;
+                lastInterecdir = movedir;
+            }
+            else
+            {
+                isWalking = false;
+            }
         }
         else
         {
             isWalking = false;
         }
 
-        // เรียก Trigger walk เฉพาะเมื่อเริ่มเดิน
-        if (isWalking && !wasWalking)
-        {
-            animator.SetTrigger("walk");
-        }
-        // เรียก idle เมื่อหยุดเดิน
-        if (!isWalking && wasWalking && !isLifting)
-        {
-            animator.SetTrigger("idle");
-        }
+        animator.SetBool("isWalking", isWalking);
+        animator.SetBool("isLifting", isLifting);
 
         wasWalking = isWalking;
 
-        // isLifting เดินอยู่ด้วยก็เล่น lift-walk
-        if (isLifting && isWalking)
-        {
-            animator.SetTrigger("lift-walk");
-        }
 
         CheckForItem();
 
@@ -125,7 +113,7 @@ public class playerController : MonoBehaviour
         holdingObject = item;
 
         isLifting = true;
-        animator.SetTrigger("lift-idle");
+
     }
 
     public bool Iswalking()
@@ -157,8 +145,6 @@ public class playerController : MonoBehaviour
         holding = false;
         isLifting = false;
         holdingObject = null;
-
-        animator.SetTrigger("idle");
     }
 
     void CheckForItem()
@@ -173,5 +159,30 @@ public class playerController : MonoBehaviour
                 itemInFront = hit.transform;
             }
         }
+    }
+
+    public Transform GetholdingObject()
+    {
+        return holdingObject;
+    }
+
+    public bool Getholding()
+    {
+        return holding;
+    }
+
+    public void SetholdingObject(Transform t)
+    {
+        holdingObject = t;
+    }
+
+    public void Setholding(bool h)
+    {
+        holding = h;
+    }
+
+    public void SetisLifting(bool l)
+    {
+        isLifting = l;
     }
 }

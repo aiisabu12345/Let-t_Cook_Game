@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class GameManager : MonoBehaviour
     public float cocoCoin = 0;
     public GameObject newsPanel;
     playerController playerController;
+    public TMP_Text cocoCoinText;
 
     void Awake()
     {
@@ -34,38 +36,6 @@ public class GameManager : MonoBehaviour
         playerController = GameObject.FindWithTag("Player").GetComponent<playerController>();
     }
 
-    void Update()
-    {
-        /*if (Input.GetKeyDown(KeyCode.E))
-        {
-            inventoryPanel.SetActive(!inventoryPanel.activeSelf);
-            panelManager.SetPotion();
-        }
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            gatheringPanel.SetActive(!gatheringPanel.activeSelf);
-            gatheringManager.SetPartyIdle();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            potionCraft.SetActive(!potionCraft.activeSelf);
-            potionCraftManager.SetMaterialCraft();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            sellPanel.SetActive(!sellPanel.activeSelf);
-            sellManager.OnOpen();
-        }
-
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            ShowNews();
-        }*/
-    }
-
     public void ShowNews()
     {
         newsPanel.SetActive(!newsPanel.activeSelf);
@@ -74,5 +44,17 @@ public class GameManager : MonoBehaviour
     {
         p.SetActive(false);
         playerController.EnableControl(true);
+    }
+
+    public void AddCoco(float c)
+    {
+        cocoCoin += c;
+        cocoCoinText.text = "X " + cocoCoin.ToString();
+    }
+
+    public void UseCoco(float c)
+    {
+        cocoCoin -= c;
+        cocoCoinText.text = "X " + cocoCoin.ToString();
     }
 }

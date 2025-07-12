@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class InventoryManager : MonoBehaviour
+public class InventoryManager : NormalFunctionForPanel
 {
     public static InventoryManager Instance;
 
@@ -13,7 +13,9 @@ public class InventoryManager : MonoBehaviour
     public List<PotionData> potionSheet = new List<PotionData>();
     public List<PotionData> potionList = new List<PotionData>();
     public List<Sprite> bg = new List<Sprite>();
-
+    public GameObject panel;
+    public PanelManager panelManager;
+    public Transform spawnPoint;
 
     void Awake()
     {
@@ -25,6 +27,13 @@ public class InventoryManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public override void OnOpen()
+    {
+        panel.SetActive(true);
+        panelManager.SetPotion();
+
     }
 
     public void AddPotion(List<string> status, int tier)
@@ -66,7 +75,6 @@ public class InventoryManager : MonoBehaviour
         newMaterial.tier = tier;
         newMaterial.status = materialSheet[m].status;
         materialList.Add(newMaterial);
-        Debug.Log("add " + newMaterial.materialName);
     }
 
     public void CreatePotion(List<string> status, int tier, Transform spawnPoint)
