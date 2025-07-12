@@ -1,18 +1,20 @@
-﻿using UnityEngine;
+﻿using AnimatedBattleText.Examples;
+using PixelBattleText;
+using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class AimTrainerManager : MonoBehaviour
 {
     public Sprite[] targetSprites;
     public RectTransform targetImage;
-    private Image targetUIImage; 
+    private Image targetUIImage;
     public RectTransform spawnArea;
     public Text resultText;
     public Text countClick;
     public GameObject uiCanvas;
 
-    private float gameDuration = 5f;
+    private float gameDuration = 6f;
     private float targetTimeout = 3f;
 
     private int targetsClicked = 0;
@@ -21,10 +23,32 @@ public class AimTrainerManager : MonoBehaviour
 
     private bool gameRunning = false;
 
+    // เพิ่มสำหรับ PotionCraftManager
+    public bool isMinigameDone = false;
+    public bool isWin = false;
+
+    [SerializeField] private ExampleTextManager textManager;
+    [Header("---Text Trigger---")]
+    [SerializeField] private string triggerMessageWinner;
+    [SerializeField] private string triggerMessageLose;
+    [Header("---Text use anim---")]
+    [SerializeField] public TextAnimation textToUse;
+    [SerializeField] public TextAnimation textToUseLose;
+
+
+    AudioManager audioManager;
+
+    public CountdownTimer countdownTimer;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindWithTag("Audio").GetComponent<AudioManager>();
+    }
     void Start()
     {
         targetUIImage = targetImage.GetComponent<Image>();
-        StartGame();
+        // ไม่ต้องเริ่มเกมตรงนี้แล้ว
+        // StartGame();
     }
 
     void Update()
@@ -34,37 +58,48 @@ public class AimTrainerManager : MonoBehaviour
         gameTimer += Time.deltaTime;
         targetTimer += Time.deltaTime;
 
-        // ถ้าเลย 3 วิ แล้วยังไม่คลิกเป้า
         if (targetTimer >= targetTimeout)
         {
             GameFail();
         }
 
-        // ถ้าเลยเวลาเกม
         if (gameTimer >= gameDuration)
         {
             GameFail();
         }
     }
 
-    void StartGame()
+    public void resetCountdown()
     {
-        countClick.text = "" + +5;
+        isMinigameDone = false;
+        isWin = false;
+
+        uiCanvas.SetActive(true);
+        countClick.text = "Count : 6" ;
         resultText.gameObject.SetActive(false);
+
         gameRunning = true;
         gameTimer = 0f;
+        targetTimer = 0f;
         targetsClicked = 0;
 
         SpawnNewTarget();
+
+        // ✅ เรียกรีเซ็ต countdown timer
+        if (countdownTimer != null)
+        {
+            countdownTimer.ResetTimer();
+        }
     }
+
 
     public void OnTargetClicked()
     {
         targetsClicked++;
-        countClick.text = ""+ (5-targetsClicked);
+        countClick.text = "Count : " + (6 - targetsClicked).ToString();
         targetTimer = 0f;
 
-        if (targetsClicked >= 5)
+        if (targetsClicked >= 6)
         {
             GameWin();
         }
@@ -76,7 +111,6 @@ public class AimTrainerManager : MonoBehaviour
 
     void SpawnNewTarget()
     {
-        // สุ่มภาพก่อน
         if (targetSprites.Length > 0)
         {
             Sprite randomSprite = targetSprites[Random.Range(0, targetSprites.Length)];
@@ -97,15 +131,31 @@ public class AimTrainerManager : MonoBehaviour
         targetImage.anchoredPosition = new Vector2(randX, randY);
     }
 
-
-
     void GameWin()
     {
+        isMinigameDone = true;
+        isWin = true;
         EndGame("WINNER");
+        audioManager.PlaySFX(audioManager.winner);
+        textManager.LastUsed = textToUse;
+        textManager.ShowInputText(triggerMessageWinner);
+        if (countdownTimer != null)
+        {
+            countdownTimer.StopTimer();
+        }
+        else
+        {
+            Debug.LogWarning("CountdownTimer is missing!");
+        }
     }
 
-    void GameFail()
+    public void GameFail()
     {
+        audioManager.PlaySFX(audioManager.lose);
+        textManager.LastUsed = textToUseLose;
+        textManager.ShowInputText(triggerMessageLose);
+        isMinigameDone = true;
+        isWin = false;
         EndGame("FAIL");
     }
 
@@ -116,7 +166,6 @@ public class AimTrainerManager : MonoBehaviour
         resultText.gameObject.SetActive(true);
         resultText.text = result;
 
-        // ปิด Canvas หลังแสดงผล 1 วินาที
         Invoke(nameof(CloseCanvas), 1f);
     }
 

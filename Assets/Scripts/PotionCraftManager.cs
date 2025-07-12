@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class PotionCraftManager : NormalFunctionForPanel
+public class PotionCraftManager : MonoBehaviour
 {
     public static PotionCraftManager Instance;
     public int maxMaterial;
@@ -13,9 +13,9 @@ public class PotionCraftManager : NormalFunctionForPanel
     public Button craftButton;
     public GameObject itemButtonMaterial;
     public GameObject potMinigame;
+    public GameObject aimgame;
     public GameObject cardMinigame;
     public GameObject arrowMinigame;
-    public Button exitButton;
     void Awake()
     {
         if (Instance == null)
@@ -26,23 +26,6 @@ public class PotionCraftManager : NormalFunctionForPanel
         {
             Destroy(gameObject);
         }
-    }
-
-    void Update()
-    {
-        if (materialSelect.Count < 1)
-        {
-            craftButton.interactable = false;
-        }
-        else
-        {
-            craftButton.interactable = true;
-        }
-    }
-
-    public override void OnOpen()
-    {
-        SetMaterialCraft();
     }
 
     public void SetMaterialCraft()
@@ -102,8 +85,7 @@ public class PotionCraftManager : NormalFunctionForPanel
 
     private IEnumerator CraftPotionCoroutine()
     {
-        int Rand = Random.Range(0, 3);
-        exitButton.interactable = false;
+        int Rand = Random.Range(0, 4);
 
         //optimize this shit later T-T
         //Way to optimize
@@ -201,7 +183,45 @@ public class PotionCraftManager : NormalFunctionForPanel
                 // Reset flag สำหรับเล่นใหม่ครั้งหน้า
                 miniGame3.isMinigameDone = false;
                 break;
+            case 3:
+                AimTrainerManager miniGame4 = aimgame.GetComponent<AimTrainerManager>();
+ 
+          
+
+                miniGame4.gameObject.SetActive(true); // ให้มัน awake และ Update ทำงานก่อน
+                yield return null; // รอ 1 frame เพื่อให้ Awake/Start/Update ทำงานทัน
+
+                miniGame4.resetCountdown();
+                // รีเซ็ตสถานะก่อน
+                miniGame4.isMinigameDone = false;
+                miniGame4.isWin = false;
+
+                while (!miniGame4.isMinigameDone)
+                {
+                    yield return null;
+                }
+
+                if (miniGame4.isWin)
+                {
+                    List<string> status = new List<string>();
+                    for (int i = 0; i < materialSelect.Count; i++)
+                    {
+                        status.Add(materialSelect[i].status);
+                    }
+
+                    int rand = Random.Range(0, materialSelect.Count);
+                    int tier = materialSelect[rand].tier;
+                    InventoryManager.Instance.AddPotion(status, tier);
+                }
+
+                materialSelect.Clear();
+                SetMaterialCraft();
+                SetMaterialSelect();
+
+                // Reset flag สำหรับเล่นใหม่ครั้งหน้า
+                miniGame4.isMinigameDone = false;
+                break;
+
         }
-        exitButton.interactable = true;
     }
 }
