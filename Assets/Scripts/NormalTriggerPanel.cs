@@ -28,7 +28,6 @@ public class NormalTriggerPanel : MonoBehaviour
                 Debug.LogWarning("TextManager fail");
             }
 
-<<<<<<< HEAD
             UIPanel.SetActive(true);
             bool check = false;
             if (!check)
@@ -41,18 +40,6 @@ public class NormalTriggerPanel : MonoBehaviour
                     Debug.Log("Open");
                 }
             }
-=======
-            NormalFunctionForPanel np = UIPanel.GetComponent<NormalFunctionForPanel>();
-            if (np != null)
-            {
-                np.OnOpen();
-                Debug.Log("Open");
-            }
-           
-            UIPanel.SetActive(true);
-            
-
->>>>>>> origin/dev2.2
         }
     }
 }
