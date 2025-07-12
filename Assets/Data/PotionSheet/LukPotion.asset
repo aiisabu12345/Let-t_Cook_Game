@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adac5a8b2457e5f49aadfc07b64e5c64, type: 3}
   m_Name: LukPotion
   m_EditorClassIdentifier: 
-  model: {fileID: 3584848056408598087, guid: df24ecd50373eaf419e020c169110869, type: 3}
+  model: {fileID: 2916194918518293052, guid: ed22889c7fe292d40b1b73d857201c7c, type: 3}
   icon: {fileID: 21300000, guid: 9a195b82a50faf04bbe4ccd6d4a42fcd, type: 3}
   potionName: Lucky Potion
   status:

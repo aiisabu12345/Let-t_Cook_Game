@@ -5,17 +5,17 @@ using UnityEngine.UI;
 using TMPro;
 using PrimeTween;
 
-public class SellManager : NormalFunctionForPanel
+public class SellManager : MonoBehaviour
 {
     public static SellManager Instance;
-    public List<PotionData> potionSelect = new List<PotionData>();
+    /*public List<PotionData> potionSelect = new List<PotionData>();
     public Transform selectPotionTransform;
     public Transform panelPotionTransform;
     public Button sellButton;
     public GameObject itemButtonPotion;
     public TMP_Text priceText;
-    public TMP_Text cocoCoinText;
-    public float sumPrice = 0;
+    public TMP_Text cocoCoinText;*/
+    //public float sumPrice = 0;
 
 
 
@@ -32,7 +32,7 @@ public class SellManager : NormalFunctionForPanel
         }
     }
 
-    public override void OnOpen()
+    /*public override void OnOpen()
     {
         SetPotionSelect();
         SetPotionSell();
@@ -111,19 +111,42 @@ public class SellManager : NormalFunctionForPanel
         }
 
         priceText.text = "Price : " + sumPrice.ToString();
-    }
+    }*/
 
-    public void SellPotion()
+    public string SellPotion(PotionData p)
     {
-        GameManager.Instance.cocoCoin += sumPrice;
-        cocoCoinText.text = "Coco : " + GameManager.Instance.cocoCoin.ToString();
-       
-        potionSelect.Clear();
-        SetPotionSell();
+        float temPrice = p.price;
+        if (buff.Count > 0)
+        {
+            foreach (BuffData b in buff)
+            {
+                float sumBuff = 0;
+                for (int i = 0; i < p.status.Count; i++)
+                {
+                    if (p.status[i] == b.status)
+                    {
+                        sumBuff += b.buffPercent;
+                    }
+                }
 
-        SetPotionSelect();
+                temPrice = temPrice * (1 + sumBuff / 100);
+            }
+        }
+
+        GameManager.Instance.AddCoco(temPrice);
+
+        return temPrice.ToString();
     }
 
-    
-    
+    //old
+    /* public void SellPotion()
+     {
+         //GameManager.Instance.cocoCoin += sumPrice;
+         /*cocoCoinText.text = "Coco : " + GameManager.Instance.cocoCoin.ToString();
+
+         potionSelect.Clear();
+         SetPotionSell();
+
+         SetPotionSelect();
+    } */
 }

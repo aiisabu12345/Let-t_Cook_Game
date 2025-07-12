@@ -6,18 +6,12 @@ using UnityEngine.UIElements;
 
 public class playerController : MonoBehaviour
 {
-    // Start is called before the first frame update
     public Vector3 movedir;
     private float movespeed = 7f;
     private float rotatespeed = 10f;
     public bool isWalking;
     private bool isLifting = false;
     private Vector3 lastInterecdir;
-    [SerializeField] private Transform cheese_clearcounter;
-    [SerializeField] private Transform knife_clearcounter;
-    [SerializeField] private Transform PAN_clearcounter;
-    //[SerializeField] private GameObject potion;
-    //[SerializeField] private GameObject cheese;
     [SerializeField] private Transform holdObject;
     private Transform holdingObject;
     private bool holding = false;
@@ -26,7 +20,11 @@ public class playerController : MonoBehaviour
 
     Animator animator;
     public bool canMove = true;
-    
+    private Transform itemInFront;
+    private bool wasWalking = false;
+
+    // ใช้สำหรับกัน Trigger ซ้ำ
+
     public void EnableControl(bool enable)
     {
         canMove = enable;
@@ -38,188 +36,153 @@ public class playerController : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-
-    // Update is called once per frame
     void Update()
     {
-        if (!canMove) return;
-
-        Vector2 inputVector = new Vector2(0, 0);
-        if (Input.GetKey(KeyCode.W)) inputVector.y = +1;
-        if (Input.GetKey(KeyCode.S)) inputVector.y = -1;
-        if (Input.GetKey(KeyCode.A)) inputVector.x = -1;
-        if (Input.GetKey(KeyCode.D)) inputVector.x = +1;
-
-        inputVector = inputVector.normalized;
-        Vector3 movedir = new Vector3(inputVector.x, 0f, inputVector.y);
-
-       
-        // E to lift
-       /* if (Input.GetKeyDown(KeyCode.E))
+        if (canMove)
         {
-            // วน มา true , false เรื่อยๆ
-            isLifting = !isLifting;
-            animator.SetBool("lift-idle", isLifting);
-            animator.SetBool("lift-walk", false); 
-        }*/
+            Vector2 inputVector = new Vector2(0, 0);
+            if (Input.GetKey(KeyCode.W)) inputVector.y = +1;
+            if (Input.GetKey(KeyCode.S)) inputVector.y = -1;
+            if (Input.GetKey(KeyCode.A)) inputVector.x = -1;
+            if (Input.GetKey(KeyCode.D)) inputVector.x = +1;
 
+            inputVector = inputVector.normalized;
+            Vector3 movedir = new Vector3(inputVector.x, 0f, inputVector.y);
 
-        controller.Move(movedir * movespeed * Time.deltaTime);
+            controller.Move(movedir * movespeed * Time.deltaTime);
 
-        if (movedir != Vector3.zero)
-        {
-
-            transform.forward = Vector3.Slerp(transform.forward, movedir, Time.deltaTime * rotatespeed);
-            isWalking = true;
-            lastInterecdir = movedir;
-          
+            if (movedir != Vector3.zero)
+            {
+                transform.forward = Vector3.Slerp(transform.forward, movedir, Time.deltaTime * rotatespeed);
+                isWalking = true;
+                lastInterecdir = movedir;
+            }
+            else
+            {
+                isWalking = false;
+            }
         }
         else
         {
             isWalking = false;
         }
-        animator.SetBool("walk", isWalking);
 
-        //islift
-        if (isLifting)
+        animator.SetBool("isWalking", isWalking);
+        animator.SetBool("isLifting", isLifting);
+
+        wasWalking = isWalking;
+
+
+        CheckForItem();
+
+        if (Input.GetKeyDown(KeyCode.E) && itemInFront != null && !holding)
         {
-            animator.SetBool("lift-walk", isWalking);
+            PickupItem(itemInFront);
+            itemInFront = null;
         }
 
-
-
-        if (Physics.Raycast(transform.position, lastInterecdir, out RaycastHit raycasthit, 1f))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-            if (raycasthit.transform.tag == "tp1")
-
-            {
-           
-                transform.position = new Vector3(225.19f, 1.743f, 358.6f);
-            }
-
-            //Debug.Log(raycasthit.transform);
-            //Debug.Log(clearcounter);
-
-            //การเก็บของเข้ากล่อง
-            if (raycasthit.transform == cheese_clearcounter)
-
-            {
-                //เช็คว่าถือและกด E ด้วยป่าว
-                if (Input.GetKey(KeyCode.E) && holding)
-                {
-                    Destroy(holdingObject.gameObject);
-                    holding = false;
-                    CreatePrefeb();
-                    movespeed = 7f;
-                }
-            }
-            else if (raycasthit.transform.tag == "potion" && !holding)
-
-            {
-                Debug.Log("potion");
-
-                if (raycasthit.transform.parent == null || raycasthit.transform.parent.tag != "Player")
-                {
-                    PickupItem(raycasthit.transform);
-                }
-            }
-            if (raycasthit.transform.tag == "knife" && !holding)
-
-            {
-                Debug.Log("knife");
-       
-                if (!holding)
-                {
-
-                    raycasthit.transform.SetParent(holdObject);
-                    raycasthit.transform.localPosition = Vector3.zero;
-                    holding = true;
-                    holdingObject = raycasthit.transform;
-                    movespeed = 5f;
-                   
-                }
-            }
-            if (raycasthit.transform.tag == "PAN" && !holding)
-
-            {
-                Debug.Log("PAN");
-               
-                if (!holding)
-                {
-                    raycasthit.transform.SetParent(holdObject);
-                    raycasthit.transform.localPosition = Vector3.zero;
-                    holding = true;
-                    holdingObject = raycasthit.transform;
-                    movespeed = 5f;
-               
-                }
-            }
+            DropItem();
         }
 
-        //Debug.Log(hit);
-
-      
-    }
-
-    public void CreatePrefeb()
-    {
-        // สร้างลิสต์ของแท็กที่ต้องการใช้
-        string[] tags = { "potion", "knife", "PAN" };
-
-        GameObject prefabToSpawn = null;
-
-        // ลองค้นหาวัตถุที่มีแท็กตามลำดับจนกว่าจะพบ
-        foreach (string tag in tags)
-        {
-            prefabToSpawn = GameObject.FindWithTag(tag);
-            if (prefabToSpawn != null)
-            {
-                break; // ถ้าพบวัตถุที่มีแท็กให้หยุดการค้นหา
-            }
-        }
-
-        if (prefabToSpawn != null)
-        {
-            Vector3 randomPosition = new Vector3(
-                Random.Range(-5, 5),
-                0,
-                Random.Range(-5, 5)
-            );
-            int randomPrefab = Random.Range(0, 2);
-           /* if (randomPrefab == 1)
-            {
-                prefabToSpawn = potion;
-            }*/
-            // สร้าง instance ของ prefab
-            Instantiate(prefabToSpawn, randomPosition, Quaternion.identity);
-          
-        }
-        else
-        {
-            Debug.LogWarning("No object with specified tags found in the scene.");
-        }
+        Debug.DrawRay(transform.position + Vector3.up * 0.5f, lastInterecdir * 1.5f, Color.red);
     }
 
     private void PickupItem(Transform item)
     {
         item.SetParent(holdObject);
-
-        // ให้วาร์ปเป๊ะไปตำแหน่ง holdObject
         item.localPosition = Vector3.zero;
         item.localRotation = Quaternion.identity;
-        item.localScale = Vector3.one; // ถ้า scale ของ prefab ไม่ผิดเพี้ยน
+        item.localScale = Vector3.one;
+
+        Rigidbody rb = item.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.isKinematic = true;
+            rb.useGravity = false;
+        }
+
+        Collider col = item.GetComponent<Collider>();
+        if (col != null)
+        {
+            col.enabled = false;
+        }
 
         holding = true;
         holdingObject = item;
 
         isLifting = true;
-        animator.SetBool("lift-idle", isLifting);
+
     }
-
-
 
     public bool Iswalking()
     {
         return isWalking;
+    }
+
+    private void DropItem()
+    {
+        if (!holding || holdingObject == null) return;
+
+        holdingObject.SetParent(null);
+
+        Rigidbody rb = holdingObject.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.isKinematic = false;
+            rb.useGravity = true;
+        }
+
+        Collider col = holdingObject.GetComponent<Collider>();
+        if (col != null)
+        {
+            col.enabled = true;
+        }
+
+        holdingObject.position = transform.position + transform.forward + Vector3.up * 0.5f;
+
+        holding = false;
+        isLifting = false;
+        holdingObject = null;
+    }
+
+    void CheckForItem()
+    {
+        itemInFront = null;
+        Vector3 origin = transform.position + Vector3.up * 0.5f;
+
+        if (Physics.Raycast(origin, lastInterecdir, out RaycastHit hit, 1.5f))
+        {
+            if (!holding && hit.transform.CompareTag("potion"))
+            {
+                itemInFront = hit.transform;
+            }
+        }
+    }
+
+    public Transform GetholdingObject()
+    {
+        return holdingObject;
+    }
+
+    public bool Getholding()
+    {
+        return holding;
+    }
+
+    public void SetholdingObject(Transform t)
+    {
+        holdingObject = t;
+    }
+
+    public void Setholding(bool h)
+    {
+        holding = h;
+    }
+
+    public void SetisLifting(bool l)
+    {
+        isLifting = l;
     }
 }

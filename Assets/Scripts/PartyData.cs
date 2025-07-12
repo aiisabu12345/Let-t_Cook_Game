@@ -14,4 +14,5 @@ public class PartyData : ScriptableObject
     public float rate2;
     public float timeReward;
     public TMP_Text timerText;
+    public float cost;
 }

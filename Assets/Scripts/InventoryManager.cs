@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class InventoryManager : MonoBehaviour
+public class InventoryManager : NormalFunctionForPanel
 {
     public static InventoryManager Instance;
 
@@ -13,7 +13,9 @@ public class InventoryManager : MonoBehaviour
     public List<PotionData> potionSheet = new List<PotionData>();
     public List<PotionData> potionList = new List<PotionData>();
     public List<Sprite> bg = new List<Sprite>();
-    
+    public GameObject panel;
+    public PanelManager panelManager;
+    public Transform spawnPoint;
 
     void Awake()
     {
@@ -25,6 +27,13 @@ public class InventoryManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public override void OnOpen()
+    {
+        panel.SetActive(true);
+        panelManager.SetPotion();
+
     }
 
     public void AddPotion(List<string> status, int tier)
@@ -55,10 +64,10 @@ public class InventoryManager : MonoBehaviour
         //newPotion.price = newPotion.price^newPotion.status.Count;
 
         potionList.Add(newPotion);
-        Debug.Log("add " + newPotion.potionName+" price: "+newPotion.price);
+        Debug.Log("add " + newPotion.potionName + " price: " + newPotion.price);
     }
 
-    public void AddMaterial(int m,int tier)
+    public void AddMaterial(int m, int tier)
     {
         MaterialData newMaterial = ScriptableObject.CreateInstance<MaterialData>();
         newMaterial.icon = materialSheet[m].icon;
@@ -66,6 +75,36 @@ public class InventoryManager : MonoBehaviour
         newMaterial.tier = tier;
         newMaterial.status = materialSheet[m].status;
         materialList.Add(newMaterial);
-        Debug.Log("add " + newMaterial.materialName);
+    }
+
+    public void CreatePotion(List<string> status, int tier, Transform spawnPoint)
+    {
+        PotionData originPotion = ScriptableObject.CreateInstance<PotionData>();
+        originPotion = potionSheet.Find(p => p.status[0] == status[0]);
+
+        GameObject newPotionObject = Instantiate(originPotion.model, spawnPoint.position, spawnPoint.rotation);
+        Potion newPotion = newPotionObject.GetComponent<Potion>();
+
+        newPotion.potion.model = originPotion.model;
+        newPotion.potion.potionName = originPotion.potionName;
+        newPotion.potion.icon = originPotion.icon;
+        newPotion.potion.status = status;
+        newPotion.potion.tier = tier;
+
+        if (tier == 0)
+        {
+            newPotion.potion.price = Random.Range(10, 20);
+        }
+        else if (tier == 1)
+        {
+            newPotion.potion.price = Random.Range(30, 40);
+        }
+        else
+        {
+            newPotion.potion.price = Random.Range(50, 60);
+        }
+
+        newPotion.potion.price = Mathf.Pow(newPotion.potion.price, newPotion.potion.status.Count);
+
     }
 }

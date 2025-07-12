@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adac5a8b2457e5f49aadfc07b64e5c64, type: 3}
   m_Name: IntPotion
   m_EditorClassIdentifier: 
-  model: {fileID: 0}
+  model: {fileID: 2256983514657059099, guid: 71df6eeec133cfa4ca1195098aadf281, type: 3}
   icon: {fileID: 21300000, guid: c840e261c54a2014cbebabae3a30ec43, type: 3}
   potionName: Intelligence Potion
   status:

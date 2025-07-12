@@ -16982,9 +16982,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movedir: {x: 1, y: 1, z: 1}
   isWalking: 1
-  cheese_clearcounter: {fileID: 0}
-  knife_clearcounter: {fileID: 0}
-  PAN_clearcounter: {fileID: 0}
   holdObject: {fileID: 164464667}
   canMove: 1
 --- !u!136 &745472636
@@ -17411,9 +17408,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movedir: {x: 1, y: 1, z: 1}
   isWalking: 0
-  cheese_clearcounter: {fileID: 0}
-  knife_clearcounter: {fileID: 0}
-  PAN_clearcounter: {fileID: 0}
   holdObject: {fileID: 164464667}
   canMove: 1
 --- !u!54 &771937065

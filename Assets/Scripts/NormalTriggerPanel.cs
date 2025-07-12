@@ -8,7 +8,8 @@ public class NormalTriggerPanel : MonoBehaviour
     [SerializeField] private string triggerMessage;
     [SerializeField] public TextAnimation textToUse;
     public GameObject UIPanel;
- 
+    public bool check = false;
+
     playerController playerMovement;
 
     private void OnTriggerEnter(Collider other)
@@ -28,20 +29,26 @@ public class NormalTriggerPanel : MonoBehaviour
                 Debug.LogWarning("TextManager fail");
             }
 
-
             UIPanel.SetActive(true);
-            bool check = false;
+
             if (!check)
             {
                 check = true;
-                NormalFunctionForPanel np = UIPanel.GetComponent<NormalFunctionForPanel>();
+                NormalFunctionForPanel np = UIPanel.GetComponentInParent<NormalFunctionForPanel>();
                 if (np != null)
                 {
                     np.OnOpen();
                     Debug.Log("Open");
                 }
             }
+        }
+    }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            check = false;
         }
     }
 }

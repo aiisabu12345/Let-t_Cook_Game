@@ -16,7 +16,6 @@ public class GatheringManager : NormalFunctionForPanel
     public float timeCurrent;
 
     public TMP_Text timeText;
-    public TMP_Text goldText;
 
     public bool onIdlePanel = false;
 
@@ -67,7 +66,7 @@ public class GatheringManager : NormalFunctionForPanel
                 int n = Random.Range(partyHire[i].min, partyHire[i].max + 1);
                 for (int j = n; j >= 0; j--)
                 {
-                    int m = Random.Range(0, 4);
+                    int m = Random.Range(0, 5);
                     float randTier = Random.Range(1f, 101f);
                     int tier;
                     if (randTier <= partyHire[i].rate1)
@@ -86,7 +85,6 @@ public class GatheringManager : NormalFunctionForPanel
                     SetPartyHire();
                 else if (GameManager.Instance.potionCraft.activeSelf)
                     PotionCraftManager.Instance.SetMaterialCraft();
-
             }
         }
     }
@@ -97,7 +95,22 @@ public class GatheringManager : NormalFunctionForPanel
 
         for (int i = 0; i < partyAmout; i++)
         {
-            int rand = Random.Range(0, 3);
+            int randReal = Random.Range(1, 101);
+            int rand;
+
+            if (randReal > 80)
+            {
+                rand = 2;
+            }
+            else if (randReal > 50)
+            {
+                rand = 1;
+            }
+            else
+            {
+                rand = 0;
+            }
+
             Debug.Log(rand);
             PartyData newParty = ScriptableObject.CreateInstance<PartyData>();
             newParty.partyUI = partySheet[rand].partyUI;
@@ -109,6 +122,10 @@ public class GatheringManager : NormalFunctionForPanel
             newParty.rate2 = partySheet[rand].rate2;
             newParty.timeReward = partySheet[rand].timeReward;
             newParty.partyHireUI = partySheet[rand].partyHireUI;
+            newParty.cost = partySheet[rand].cost;
+
+            TMP_Text costText = newParty.partyUI.GetComponentInChildren<Button>().GetComponentInChildren<TMP_Text>();
+            costText.text = "-" + newParty.cost.ToString();
 
             partyIdle.Add(newParty);
         }

@@ -498,3 +498,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   party: {fileID: 0}
+  hireButton: {fileID: 7606503237663559051}

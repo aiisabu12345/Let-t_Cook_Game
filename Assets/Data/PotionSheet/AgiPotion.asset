@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adac5a8b2457e5f49aadfc07b64e5c64, type: 3}
   m_Name: AgiPotion
   m_EditorClassIdentifier: 
-  model: {fileID: 3584848056408598087, guid: df24ecd50373eaf419e020c169110869, type: 3}
+  model: {fileID: 80000409743069983, guid: ad7a9c16e547a9c4ba9241d62f13cd1f, type: 3}
   icon: {fileID: 21300000, guid: 47d78d0644fb71c4abed86c438d02d19, type: 3}
   potionName: Speed Potion
   status:
