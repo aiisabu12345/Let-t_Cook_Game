@@ -36,13 +36,13 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        /*if (Input.GetKeyDown(KeyCode.E))
         {
             inventoryPanel.SetActive(!inventoryPanel.activeSelf);
             panelManager.SetPotion();
         }
 
-        /*if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R))
         {
             gatheringPanel.SetActive(!gatheringPanel.activeSelf);
             gatheringManager.SetPartyIdle();
@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
         {
             potionCraft.SetActive(!potionCraft.activeSelf);
             potionCraftManager.SetMaterialCraft();
-        }*/
+        }
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
             sellManager.OnOpen();
         }
 
-        /*if (Input.GetKeyDown(KeyCode.N))
+        if (Input.GetKeyDown(KeyCode.N))
         {
             ShowNews();
         }*/

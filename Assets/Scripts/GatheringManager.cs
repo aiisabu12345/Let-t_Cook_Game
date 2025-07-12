@@ -67,7 +67,7 @@ public class GatheringManager : NormalFunctionForPanel
                 int n = Random.Range(partyHire[i].min, partyHire[i].max + 1);
                 for (int j = n; j >= 0; j--)
                 {
-                    int m = Random.Range(0, 4);
+                    int m = Random.Range(0, 5);
                     float randTier = Random.Range(1f, 101f);
                     int tier;
                     if (randTier <= partyHire[i].rate1)

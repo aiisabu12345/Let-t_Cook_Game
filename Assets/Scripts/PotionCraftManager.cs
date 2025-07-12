@@ -16,6 +16,7 @@ public class PotionCraftManager : NormalFunctionForPanel
     public GameObject cardMinigame;
     public GameObject arrowMinigame;
     public Button exitButton;
+    public Transform spawnPoint;
     void Awake()
     {
         if (Instance == null)
@@ -130,7 +131,7 @@ public class PotionCraftManager : NormalFunctionForPanel
 
                     int rand = Random.Range(0, materialSelect.Count);
                     int tier = materialSelect[rand].tier;
-                    InventoryManager.Instance.AddPotion(status, tier);
+                    InventoryManager.Instance.CreatePotion(status, tier, spawnPoint);
                 }
 
                 materialSelect.Clear();
@@ -160,7 +161,7 @@ public class PotionCraftManager : NormalFunctionForPanel
 
                     int rand = Random.Range(0, materialSelect.Count);
                     int tier = materialSelect[rand].tier;
-                    InventoryManager.Instance.AddPotion(status, tier);
+                    InventoryManager.Instance.CreatePotion(status, tier, spawnPoint);
                 }
 
                 materialSelect.Clear();
@@ -191,7 +192,7 @@ public class PotionCraftManager : NormalFunctionForPanel
 
                     int rand = Random.Range(0, materialSelect.Count);
                     int tier = materialSelect[rand].tier;
-                    InventoryManager.Instance.AddPotion(status, tier);
+                    InventoryManager.Instance.CreatePotion(status, tier, spawnPoint);
                 }
 
                 materialSelect.Clear();

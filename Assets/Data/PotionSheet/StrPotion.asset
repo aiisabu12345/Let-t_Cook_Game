@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adac5a8b2457e5f49aadfc07b64e5c64, type: 3}
   m_Name: StrPotion
   m_EditorClassIdentifier: 
-  model: {fileID: 3584848056408598087, guid: df24ecd50373eaf419e020c169110869, type: 3}
+  model: {fileID: 5241774257073593238, guid: a9e6af65657d6c648af67bcf68618210, type: 3}
   icon: {fileID: 21300000, guid: 4aa323e40d9e54945988d1133902b839, type: 3}
   potionName: Strength Potion
   status:
