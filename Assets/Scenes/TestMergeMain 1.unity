@@ -5027,11 +5027,11 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 34b0e5858b9e6124e8925ef49abfc740, type: 2}
     - target: {fileID: 2399054185323369365, guid: e600d45b0fcf37d4983e6c0bd69a2fd3, type: 3}
       propertyPath: triggerMessageLose
-      value: Fail
+      value: FAIL
       objectReference: {fileID: 0}
     - target: {fileID: 2399054185323369365, guid: e600d45b0fcf37d4983e6c0bd69a2fd3, type: 3}
       propertyPath: triggerMessageWinner
-      value: Success
+      value: SUCCESS
       objectReference: {fileID: 0}
     - target: {fileID: 3082726843018686964, guid: e600d45b0fcf37d4983e6c0bd69a2fd3, type: 3}
       propertyPath: m_AnchorMax.y
@@ -42300,6 +42300,17 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!114 &1499110452 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2310701468610109143, guid: c9f9b2ec9c940bb46b627e5aeebccb07, type: 3}
+  m_PrefabInstance: {fileID: 7244251028171789889}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1505374520
 GameObject:
   m_ObjectHideFlags: 0
@@ -48987,8 +48998,8 @@ MonoBehaviour:
   arrowContainer: {fileID: 1120715107}
   arrowSprite: {fileID: 21300000, guid: ee55018ebcbaa6c4da25b482ec359656, type: 3}
   textManager: {fileID: 425686982}
-  triggerMessageWinner: Good Job!
-  triggerMessageLose: Miss ;(
+  triggerMessageWinner: SUCCESS
+  triggerMessageLose: FAIL
   textToUse: {fileID: 11400000, guid: 6ab249a1ad3a83741b331d06cbe39997, type: 2}
   textToUseLose: {fileID: 11400000, guid: 34b0e5858b9e6124e8925ef49abfc740, type: 2}
   timeLimit: 10
@@ -66577,8 +66588,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 833d522f621da5349863ccf9980855c3, type: 3}
   - {fileID: 21300000, guid: e94dd83dbd425214e91c78955b39ba67, type: 3}
   textManager: {fileID: 425686982}
-  triggerMessageWinner: NICE !!
-  triggerMessageLose: MISS ;(
+  triggerMessageWinner: SUCCESS
+  triggerMessageLose: FAIL
   textToUse: {fileID: 11400000, guid: 6ab249a1ad3a83741b331d06cbe39997, type: 2}
   textToUseLose: {fileID: 11400000, guid: 34b0e5858b9e6124e8925ef49abfc740, type: 2}
   timeLimit: 10
@@ -66681,7 +66692,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2019065708
 Transform:
   m_ObjectHideFlags: 0
@@ -68391,6 +68402,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5992414850065126015, guid: c9f9b2ec9c940bb46b627e5aeebccb07, type: 3}
+      propertyPath: exitButton
+      value: 
+      objectReference: {fileID: 1499110452}
+    - target: {fileID: 5992414850065126015, guid: c9f9b2ec9c940bb46b627e5aeebccb07, type: 3}
       propertyPath: potMinigame
       value: 
       objectReference: {fileID: 1364869068}
@@ -68410,6 +68425,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 114a3ea30de73bf41aae237af4f91dad, type: 3}
+    - target: {fileID: 6682453253061143238, guid: c9f9b2ec9c940bb46b627e5aeebccb07, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6744977774264656738, guid: c9f9b2ec9c940bb46b627e5aeebccb07, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

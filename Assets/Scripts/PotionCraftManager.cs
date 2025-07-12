@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class PotionCraftManager : MonoBehaviour
+public class PotionCraftManager : NormalFunctionForPanel
 {
     public static PotionCraftManager Instance;
     public int maxMaterial;
@@ -15,6 +15,7 @@ public class PotionCraftManager : MonoBehaviour
     public GameObject potMinigame;
     public GameObject cardMinigame;
     public GameObject arrowMinigame;
+    public Button exitButton;
     void Awake()
     {
         if (Instance == null)
@@ -25,6 +26,23 @@ public class PotionCraftManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    void Update()
+    {
+        if (materialSelect.Count < 1)
+        {
+            craftButton.interactable = false;
+        }
+        else
+        {
+            craftButton.interactable = true;
+        }
+    }
+
+    public override void OnOpen()
+    {
+        SetMaterialCraft();
     }
 
     public void SetMaterialCraft()
@@ -85,6 +103,7 @@ public class PotionCraftManager : MonoBehaviour
     private IEnumerator CraftPotionCoroutine()
     {
         int Rand = Random.Range(0, 3);
+        exitButton.interactable = false;
 
         //optimize this shit later T-T
         //Way to optimize
@@ -153,7 +172,7 @@ public class PotionCraftManager : MonoBehaviour
                 break;
             case 2:
                 ArrowInputUI miniGame3 = arrowMinigame.GetComponent<ArrowInputUI>();
-                miniGame3.RestartSequenceFromTrigger(); 
+                miniGame3.RestartSequenceFromTrigger();
                 miniGame3.gameObject.SetActive(true);
                 miniGame3.resetCountdown();
 
@@ -183,5 +202,6 @@ public class PotionCraftManager : MonoBehaviour
                 miniGame3.isMinigameDone = false;
                 break;
         }
+        exitButton.interactable = true;
     }
 }
