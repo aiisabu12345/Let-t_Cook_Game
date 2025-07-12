@@ -29,6 +29,10 @@ public class NormalTriggerPanel : MonoBehaviour
                 Debug.LogWarning("TextManager fail");
             }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/dev2.2
             UIPanel.SetActive(true);
 
             if (!check)
@@ -41,6 +45,7 @@ public class NormalTriggerPanel : MonoBehaviour
                     Debug.Log("Open");
                 }
             }
+<<<<<<< HEAD
         }
     }
 
@@ -49,6 +54,9 @@ public class NormalTriggerPanel : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             check = false;
+=======
+
+>>>>>>> origin/dev2.2
         }
     }
 }
