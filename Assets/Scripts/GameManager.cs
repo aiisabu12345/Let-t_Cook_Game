@@ -17,7 +17,6 @@ public class GameManager : MonoBehaviour
     public GameObject newsPanel;
     playerController playerController;
 
-
     void Awake()
     {
         if (Instance == null)

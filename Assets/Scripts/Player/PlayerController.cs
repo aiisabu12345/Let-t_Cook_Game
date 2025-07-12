@@ -55,13 +55,13 @@ public class playerController : MonoBehaviour
 
        
         // E to lift
-        if (Input.GetKeyDown(KeyCode.E))
+       /* if (Input.GetKeyDown(KeyCode.E))
         {
             // วน มา true , false เรื่อยๆ
             isLifting = !isLifting;
             animator.SetBool("lift-idle", isLifting);
             animator.SetBool("lift-walk", false); 
-        }
+        }*/
 
 
         controller.Move(movedir * movespeed * Time.deltaTime);

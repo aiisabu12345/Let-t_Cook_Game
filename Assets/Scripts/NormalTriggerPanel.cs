@@ -8,6 +8,7 @@ public class NormalTriggerPanel : MonoBehaviour
     [SerializeField] private string triggerMessage;
     [SerializeField] public TextAnimation textToUse;
     public GameObject UIPanel;
+ 
     playerController playerMovement;
 
     private void OnTriggerEnter(Collider other)
@@ -33,8 +34,10 @@ public class NormalTriggerPanel : MonoBehaviour
                 np.OnOpen();
                 Debug.Log("Open");
             }
-
+           
             UIPanel.SetActive(true);
+            
+
         }
     }
 }
