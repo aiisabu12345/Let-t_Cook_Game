@@ -14,6 +14,11 @@ public class ActiveObject : MonoBehaviour
   
         targetObject.SetActive(false);
     }
+
+    void Start()
+    {
+        targetObject.SetActive(false);
+    }
     public void TurnOn()
     {
         targetObject.SetActive(true);

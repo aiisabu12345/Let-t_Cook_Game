@@ -50,7 +50,7 @@ public class GatheringManager : NormalFunctionForPanel
         {
             timeCurrent = timeMax;
             UpdateParty();
-            
+
             if (onIdlePanel)
                 SetPartyIdle();
         }
@@ -102,7 +102,7 @@ public class GatheringManager : NormalFunctionForPanel
             {
                 rand = 2;
             }
-            else if (randReal > 50)
+            else if (randReal > 70)
             {
                 rand = 1;
             }

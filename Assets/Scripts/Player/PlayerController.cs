@@ -23,6 +23,9 @@ public class playerController : MonoBehaviour
     private Transform itemInFront;
     private bool wasWalking = false;
 
+    private float gravity = -9.81f;
+    private Vector3 velocity;
+
     // ใช้สำหรับกัน Trigger ซ้ำ
 
     public void EnableControl(bool enable)
@@ -38,6 +41,17 @@ public class playerController : MonoBehaviour
 
     void Update()
     {
+        if (!controller.isGrounded)
+        {
+            velocity.y += gravity * Time.deltaTime;
+        }
+        else
+        {
+            velocity.y = -1f; // ช่วยให้ติดพื้น
+        }
+
+        controller.Move(velocity * Time.deltaTime);
+
         if (canMove)
         {
             Vector2 inputVector = new Vector2(0, 0);

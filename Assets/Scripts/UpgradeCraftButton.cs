@@ -25,9 +25,9 @@ public class UpgradeCraftButton : MonoBehaviour
 
     public void Upgrade()
     {
-        GameManager.Instance.cocoCoin -= priceUpgrade;
+        GameManager.Instance.UseCoco(priceUpgrade);
         PotionCraftManager.Instance.maxMaterial += 1;
-        priceUpgrade = priceUpgrade * Mathf.Pow(100f, PotionCraftManager.Instance.maxMaterial);
+        priceUpgrade = priceUpgrade * Mathf.Pow(10f, PotionCraftManager.Instance.maxMaterial);
         priceText.text = "-" + priceUpgrade.ToString();
     }
 }

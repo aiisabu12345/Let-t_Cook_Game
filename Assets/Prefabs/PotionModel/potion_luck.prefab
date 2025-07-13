@@ -5206,38 +5206,38 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 431259110752885964}
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 576d0fc3041e065419d152867cad7358, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 8164078558771037576, guid: 576d0fc3041e065419d152867cad7358, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2523218488263522603}
+      addedObject: {fileID: 2319128954664599019}
   m_SourcePrefab: {fileID: 100100000, guid: 576d0fc3041e065419d152867cad7358, type: 3}
---- !u!4 &5933714750532006495 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 576d0fc3041e065419d152867cad7358, type: 3}
-  m_PrefabInstance: {fileID: 6184132085381977524}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &6418503082619234533 stripped
+--- !u!1 &2638776694758412348 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 576d0fc3041e065419d152867cad7358, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8164078558771037576, guid: 576d0fc3041e065419d152867cad7358, type: 3}
   m_PrefabInstance: {fileID: 6184132085381977524}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2523218488263522603
+--- !u!114 &2319128954664599019
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6418503082619234533}
+  m_GameObject: {fileID: 2638776694758412348}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
-  outlineColor: {r: 0.048407555, g: 1, b: 0, a: 1}
-  outlineWidth: 2
+  outlineColor: {r: 0.047058824, g: 1, b: 0, a: 1}
+  outlineWidth: 2.5
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!4 &5933714750532006495 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 576d0fc3041e065419d152867cad7358, type: 3}
+  m_PrefabInstance: {fileID: 6184132085381977524}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6363576143984355745
 PrefabInstance:
   m_ObjectHideFlags: 0

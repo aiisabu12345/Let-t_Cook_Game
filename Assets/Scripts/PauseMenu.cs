@@ -17,7 +17,7 @@ public class PauseMenu : MonoBehaviour
     {
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
-           if(isPaused)
+            if (isPaused)
             {
                 Resume();
             }
@@ -46,5 +46,9 @@ public class PauseMenu : MonoBehaviour
         audioManager.ResetMusic();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1;
+    }
+    public void nextScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
     }
 }

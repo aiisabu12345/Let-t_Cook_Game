@@ -20,5 +20,6 @@ MonoBehaviour:
   max: 4
   rate1: 50
   rate2: 0
-  timeReward: 10
+  timeReward: 30
   timerText: {fileID: 0}
+  cost: 500

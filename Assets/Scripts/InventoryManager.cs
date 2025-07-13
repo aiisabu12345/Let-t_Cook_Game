@@ -49,15 +49,15 @@ public class InventoryManager : NormalFunctionForPanel
 
         if (tier == 0)
         {
-            newPotion.price = Random.Range(10, 20);
+            newPotion.price = Random.Range(50, 60);
         }
         else if (tier == 1)
         {
-            newPotion.price = Random.Range(30, 40);
+            newPotion.price = Random.Range(75, 90);
         }
         else
         {
-            newPotion.price = Random.Range(50, 60);
+            newPotion.price = Random.Range(100, 120);
         }
 
         newPotion.price = Mathf.Pow(newPotion.price, newPotion.status.Count);

@@ -22,3 +22,4 @@ MonoBehaviour:
   rate2: 0
   timeReward: 10
   timerText: {fileID: 0}
+  cost: 0
