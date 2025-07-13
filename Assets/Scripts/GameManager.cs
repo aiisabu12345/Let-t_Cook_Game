@@ -49,12 +49,12 @@ public class GameManager : MonoBehaviour
     public void AddCoco(float c)
     {
         cocoCoin += c;
-        cocoCoinText.text = "X " + cocoCoin.ToString();
+        cocoCoinText.text = " X " + cocoCoin.ToString();
     }
 
     public void UseCoco(float c)
     {
         cocoCoin -= c;
-        cocoCoinText.text = "X " + cocoCoin.ToString();
+        cocoCoinText.text = " X " + cocoCoin.ToString();
     }
 }

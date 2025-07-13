@@ -98,7 +98,7 @@ public class GatheringManager : NormalFunctionForPanel
             int randReal = Random.Range(1, 101);
             int rand;
 
-            if (randReal > 80)
+            if (randReal > 95)
             {
                 rand = 2;
             }
